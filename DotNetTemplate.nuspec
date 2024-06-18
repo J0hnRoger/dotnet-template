@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-
-    <id>DotNet.JRR.Solution.Template</id>
+    <id>DotNet.JRR.Templates</id>
     <version>1.0.0</version>
     <title>DotNet Template</title>
     <authors>Jonathan Roger</authors>
@@ -12,15 +11,13 @@
     </summary>
     <releaseNotes>
     </releaseNotes>
-
+      
     <projectUrl>https://github.com/J0hnRoger/dotnet-template</projectUrl>
     <repository type="git" url="https://github.com/J0hnRoger/dotnet-template" branch="main" />
 
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>clean-architecture project template csharp dotnet react typescript vitejs</tags>
-    <icon>icon.png</icon>
-    <readme>README.md</readme>
 
     <packageTypes>
       <packageType name="Template" />
