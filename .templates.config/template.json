@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "John Roger",
+  "classifications": [
+    "Web",
+    "SPA",
+    "ASP.NET",
+    "Hangfire",
+    "Clean Architecture"
+  ],
+  "name": "Dotnet Solution Templates",
+  "description": "A Clean Architecture Solution Template for creating a Single-Page Application (SPA) with ASP.NET Core.",
+  "identity": "DotNet.Architecture.Solution.CSharp",
+  "groupIdentity": "DotNet.Architecture.Solution",
+  "shortName": "jr-sln",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "DotNetProject",
+  "preferNameDirectory": true,
+  "symbols": {
+    "ClientFramework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "React",
+          "description": "Use React"
+        },
+        {
+          "choice": "None",
+          "description": "Web API only"
+        }
+      ],
+      "defaultValue": "React",
+      "description": "The type of client framework to use"
+    },
+    "UseReact": {
+      "type": "computed",
+      "value": "(ClientFramework == \"React\")"
+    },
+    "UseApiOnly": {
+      "type": "computed",
+      "value": "(ClientFramework == \"None\")"
+    },
+    "UseSQLite": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Whether to use SQLite instead of LocalDB."
+    },
+    "UseLocalDB": {
+      "type": "computed",
+      "value": "(!UseSQLite)"
+    },
+    "jrRepositoryUrl": {
+      "type": "generated",
+      "generator": "constant",
+      "replaces": "jrRepositoryUrl",
+      "parameters": {
+        "value": "https://github.com/J0hnRoger/dotnet-template"
+      }
+    },
+    "caPackageVersion": {
+      "type": "generated",
+      "generator": "constant",
+      "replaces": "jrPackageVersion",
+      "parameters": {
+        "value": "8.0.5"
+      }
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        ".template.config/**/*",
+        "templates/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "*.nuspec"
+      ],
+      "rename": {
+        "README-template.md": "README.md"
+      },
+      "modifiers": [
+        {
+          "condition": "(UseAngular)",
+          "exclude": [
+            "src/Web/ClientApp-React/**",
+            "src/Web/Endpoints/Users.cs",
+            "src/Web/Templates/**",
+            "src/Web/config-react.nswag",
+            "src/Web/config-webapi.nswag",
+            "src/Web/Web-webapi.http"
+          ]
+        },
+        {
+          "condition": "(UseReact)",
+          "exclude": [
+            "src/Web/ClientApp/**",
+            "src/Web/Endpoints/Users.cs",
+            "src/Web/config.nswag",
+            "src/Web/config-webapi.nswag",
+            "src/Web/Web-webapi.http"
+          ],
+          "rename": {
+            "config-react.nswag": "config.nswag",
+            "ClientApp-React": "ClientApp"
+          }
+        },
+        {
+          "condition": "(UseApiOnly)",
+          "exclude": [
+            "src/Web/ClientApp/**",
+            "src/Web/ClientApp-React/**",
+            "src/Web/Templates/**",
+            "src/Web/config.nswag",
+            "src/Web/config-react.nswag",
+            "src/Web/Web.http",
+            "tests/Web.AcceptanceTests/**"
+          ],
+          "rename": {
+            "config-webapi.nswag": "config.nswag",
+            "Web-webapi.http": "Web.http"
+          }
+        },
+        {
+          "condition": "(UseLocalDB)",
+          "exclude": [
+            "src/Infrastructure/Data/SQLite/**",
+            "src/Web/appsettings.SQLite.json",
+            "src/Web/app.db",
+            "tests/Application.FunctionalTests/SqliteTestDatabase.cs"
+          ]
+        },
+        {
+          "condition": "(UseSQLite)",
+          "exclude": [
+            "src/Infrastructure/Data/Migrations/**",
+            "src/Web/appsettings.json",
+            "tests/Application.FunctionalTests/SqlServerTestDatabase.cs",
+            "tests/Application.FunctionalTests/TestcontainersTestDatabase.cs"
+          ],
+          "rename": {
+            "src/Infrastructure/Data/SQLite/": "src/Infrastructure/Data/Migrations/",
+            "appsettings.SQLite.json": "appsettings.json",
+            "TestDatabase.Sqlite.cs": "TestDatabase.cs"
+          }
+        }
+      ]
+    }
+  ]
+}

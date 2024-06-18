@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+
+    <id>DotNet.JRR.Solution.Template</id>
+    <version>1.0.0</version>
+    <title>DotNet Template</title>
+    <authors>Jonathan Roger</authors>
+    <description>Templates collection for dotnet project</description>
+    <summary>
+      A project Solution Template using clean architecture and DDD principle for creating apps using React, or Web API only with ASP.NET Core.
+    </summary>
+    <releaseNotes>
+    </releaseNotes>
+
+    <projectUrl>https://github.com/J0hnRoger/dotnet-template</projectUrl>
+    <repository type="git" url="https://github.com/J0hnRoger/dotnet-template" branch="main" />
+
+    <license type="expression">MIT</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>clean-architecture project template csharp dotnet react typescript vitejs</tags>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+
+  </metadata>
+
+  <files>
+    <file src="README.md" />
+    <file src=".\**" target="content" exclude="**\node_modules\**;**\bin\**;**\obj\**;.\.vs\**;.\.vscode\**;**\client\dist\**;**\wwwroot\dist\**;content\Directory.Build.*;.\.git\**;.\.github\workflows\package.yml;.\.github\workflows\codeql.yml;.\.github\ISSUE_TEMPLATE\**;.\.github\icon.png;.\CODE_OF_CONDUCT.md;.\LICENSE;.\README.md;" />
+  </files>
+
+</package>
