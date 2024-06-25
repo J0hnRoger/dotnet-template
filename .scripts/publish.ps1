@@ -1,2 +1,4 @@
 dotnet new uninstall ./
-dotnet pack ./DotNetTemplate.nuspec --output ./dist
+nuget pack ./DotNetTemplate.nuspec -OutputDirectory ./dist
+
+dotnet new install ./

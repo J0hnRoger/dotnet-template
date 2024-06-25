@@ -17,7 +17,7 @@
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "DotNetProject",
+  "sourceName": "DotnetTemplate",
   "preferNameDirectory": true,
   "symbols": {
     "ClientFramework": {
@@ -81,12 +81,16 @@
         "**/*.filelist",
         "**/*.user",
         "**/*.lock.json",
-        "*.nuspec"
+        "*.nuspec",
+        ".vs/**", ".git/**", ".idea/**", ".scripts/publish.ps1"
       ],
       "rename": {
         "README-template.md": "README.md"
       },
       "modifiers": [
+        {
+          "exclude": []
+        },
         {
           "condition": "(UseAngular)",
           "exclude": [
