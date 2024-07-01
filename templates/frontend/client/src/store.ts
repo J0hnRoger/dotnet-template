@@ -1,8 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { addInfrastructure } from "./dependencyInjection";
+import { jobOfferApi } from "./features/jobOffering/infrastructure/jobOfferApi";
+
+import jobOfferReducer from "./features/jobOffering";
+import uiReducer from "./core/ui";
+import notificationReducer from "./core/notifications";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
 
 const configuration = {}; // TODO
-const { container, TYPES } = addInfrastructure(configuration);
+const { container, TYPES } = addInfrastructure();
 
 // Fonction utilitaire pour récupérer les noms des paramètres d'une fonction
 const getParamNames = (func) => {
@@ -30,15 +36,16 @@ const featureMiddlewares = [];
 
 const store = configureStore({
   reducer: {
-    books: withInjectedServices(),
+    jobOffer: jobOfferReducer,
     ui: uiReducer,
-    notifications: notificationsReducer,
+    notification: notificationReducer,
+    [jobOfferApi.reducerPath]: jobOfferApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      injectedBooksMiddleware,
-      injectedApiMiddleware
-    ),
+    getDefaultMiddleware().concat(jobOfferApi.middleware),
+  devTools: process.env.NODE_ENV !== "production", // Activer les DevTools uniquement en mode développement
 });
+
+setupListeners(store.dispatch);
 
 export default store;

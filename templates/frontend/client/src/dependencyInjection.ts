@@ -6,7 +6,7 @@ interface IApiService {}
 
 interface ILoggerService {}
 
-@injectable()
+// @injectable()
 class ApiService implements IApiService {
   async fetch(url: string, options: RequestInit) {
     const response = await fetch(url, options);
@@ -14,7 +14,7 @@ class ApiService implements IApiService {
   }
 }
 
-@injectable()
+// @injectable()
 class LoggerService implements ILoggerService {
   log(message: string) {
     console.log(message);
@@ -26,7 +26,7 @@ const TYPES = {
   LoggerService: Symbol.for("LoggerService"),
 };
 
-export const addInfrastructure = (configuration) => {
+export const addInfrastructure = () => {
   const container = new Container();
   // TODO: Access configuration for create instances
   container.bind<ApiService>(TYPES.ApiService).to(ApiService);
