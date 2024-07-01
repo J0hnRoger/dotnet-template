@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
-  <metadata>
-    <id>DotNet.JRR.Templates</id>
-    <version>1.0.0</version>
-    <title>DotNet Template</title>
-    <authors>Jonathan Roger</authors>
-    <description>Templates collection for dotnet project</description>
-    <summary>
-      A project Solution Template using clean architecture and DDD principle for creating apps using React, or Web API only with ASP.NET Core.
-    </summary>
-    <releaseNotes>
-    </releaseNotes>
-    <readme>README.md</readme> 
-    <projectUrl>https://github.com/J0hnRoger/dotnet-template</projectUrl>
-    <repository type="git" url="https://github.com/J0hnRoger/dotnet-template" branch="main" />
+    <metadata>
+        <id>DotNet.JRR.Templates</id>
+        <version>1.0.0</version>
+        <title>DotNet Template</title>
+        <authors>Jonathan Roger</authors>
+        <description>Templates collection for dotnet project</description>
+        <summary>
+            A project Solution Template using clean architecture and DDD principle for creating apps using React, or Web
+            API only with ASP.NET Core.
+        </summary>
+        <releaseNotes>
+        </releaseNotes>
+        <readme>README.md</readme>
+        <projectUrl>https://github.com/J0hnRoger/dotnet-template</projectUrl>
+        <repository type="git" url="https://github.com/J0hnRoger/dotnet-template" branch="main"/>
 
-    <license type="expression">MIT</license>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <tags>clean-architecture project template csharp dotnet react typescript vitejs</tags>
+        <license type="expression">MIT</license>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>clean-architecture project template csharp dotnet react typescript vitejs</tags>
 
-    <packageTypes>
-      <packageType name="Template" />
-    </packageTypes>
+        <packageTypes>
+            <packageType name="Template"/>
+        </packageTypes>
 
-  </metadata>
+    </metadata>
 
-  <files>
-    <file src="README.md" exclude="" />
-    <file src=".\**" target="content" exclude="**\node_modules\**;**\bin\**;**\obj\**;.\.vs\**;.\.vscode\**;**\client\dist\**;**\wwwroot\dist\**;content\Directory.Build.*;.\.git\**;.\.git\**\*.*;.\.idea\**;.\.github\workflows\package.yml;.\.github\workflows\codeql.yml;.\.github\ISSUE_TEMPLATE\**;.\.github\icon.png;.\CODE_OF_CONDUCT.md;.\LICENSE;.\README.md;" />
-  </files>
+    <files>
+        <file src="README.md" exclude=""/>
+        <file src=".\templates\backend\**" target="content\templates\WebApi"
+              exclude="**\node_modules\**;**\bin\**;**\obj\**;.\.vs\**;.\.vscode\**;**\client\dist\**;**\wwwroot\dist\**;content\Directory.Build.*;.\.git\**;.\.git\**\*.*;.\.idea\**;.\.github\workflows\package.yml;.\.github\workflows\codeql.yml;.\.github\ISSUE_TEMPLATE\**;.\.github\icon.png;.\CODE_OF_CONDUCT.md;.\LICENSE;.\README.md;"/>
+        <file src=".\templates\frontend\**" target="content\templates\FrontEnd"
+              exclude="**\node_modules\**;**\bin\**;**\obj\**;.\.vs\**;.\.vscode\**;**\client\dist\**;**\wwwroot\dist\**;content\Directory.Build.*;.\.git\**;.\.git\**\*.*;.\.idea\**;.\.github\workflows\package.yml;.\.github\workflows\codeql.yml;.\.github\ISSUE_TEMPLATE\**;.\.github\icon.png;.\CODE_OF_CONDUCT.md;.\LICENSE;.\README.md;"/>
+    </files>
 
 </package>

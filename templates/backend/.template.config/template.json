@@ -11,7 +11,7 @@
   "name": "Dotnet Solution Templates",
   "description": "A Clean Architecture Solution Template for creating a Single-Page Application (SPA) with ASP.NET Core.",
   "identity": "DotNet.Architecture.Solution.CSharp",
-  "groupIdentity": "DotNet.Architecture.Solution",
+  "groupIdentity": "DotNet.Architecture.Backend",
   "shortName": "jr-sln",
   "tags": {
     "language": "C#",

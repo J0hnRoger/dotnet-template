@@ -1,0 +1,19 @@
+# Dockerfile.dev
+FROM node:latest
+
+WORKDIR /app
+
+# Copier package.json et package-lock.json
+COPY package*.json ./
+
+# Installer les dépendances
+RUN npm install
+
+# Copier tout le code source
+COPY . .
+
+# Exposer le port de Vite
+EXPOSE 3000
+
+# Commande par défaut pour démarrer Vite en mode développement
+CMD ["npm", "run", "dev"]

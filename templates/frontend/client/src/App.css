@@ -1,0 +1,72 @@
+body,
+html,
+#root {
+    height: 100%;
+}
+
+.challenge-screen {
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 200px;
+    /* Assure que chaque carte a une largeur minimale */
+    white-space: nowrap;
+    /* Garde le contenu de la carte sur une seule ligne autant que possible */
+}
+
+.skill {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.skills h4 {
+    margin: 0;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.placeholders {
+    padding: 8px;
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+}
+
+.card--selected {
+    background-color: #f0f0f0;
+}
+
+.sequence-screen {
+    text-align: center;
+}
+
+.skill {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px;
+    display: inline-block;
+}
+
+.skill:hover {
+    background-color: #f0f0f0;
+}
+
+.selected-skills {
+    margin-top: 20px;
+}
