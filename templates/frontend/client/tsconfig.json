@@ -25,19 +25,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@lib/*": [
-        "src/lib/*"
-      ]
+      "@/*": ["./src/*", "./dist/*", ""],
     }
   },
   "include": [
     "src"
-  ],
+, "mocks/jobApiMocks.ts"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

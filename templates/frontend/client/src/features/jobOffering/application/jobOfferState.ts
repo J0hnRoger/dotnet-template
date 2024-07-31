@@ -1,13 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { SerializedError, createSlice } from "@reduxjs/toolkit";
 import { jobOfferApi } from "../infrastructure/jobOfferApi";
+import { JobOfferDto } from "./types/jobOfferTypes";
+
+interface JobOfferState {
+  jobOffers: JobOfferDto[];
+  loading: boolean;
+  error: SerializedError | null;
+}
+
+const initialState: JobOfferState = {
+  jobOffers: [],
+  loading: false,
+  error: null,
+};
 
 const jobOfferSlice = createSlice({
   name: "jobOffer",
-  initialState: {
-    jobOfferings: [],
-    loading: false,
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -22,7 +31,7 @@ const jobOfferSlice = createSlice({
         jobOfferApi.endpoints.fetchJobOffers.matchFulfilled,
         (state, action) => {
           state.loading = false;
-          state.jobOfferings = action.payload;
+          state.jobOffers = action.payload;
         }
       )
       .addMatcher(

@@ -1,36 +1,50 @@
-import "reflect-metadata";
-import { Container, injectable } from "inversify";
+import { asClass, asFunction, createContainer } from "awilix";
+import { storeProvider } from "./store";
 
 // From Application Layer
-interface IApiService {}
-
-interface ILoggerService {}
-
-// @injectable()
-class ApiService implements IApiService {
-  async fetch(url: string, options: RequestInit) {
-    const response = await fetch(url, options);
-    return response.json();
-  }
+interface IApiService {
+  fetchAll<T>(): Array<T>;
 }
 
-// @injectable()
-class LoggerService implements ILoggerService {
-  log(message: string) {
-    console.log(message);
-  }
+interface ILogger {
+  logInformation(message: string);
 }
 
-const TYPES = {
-  ApiService: Symbol.for("ApiService"),
-  LoggerService: Symbol.for("LoggerService"),
+const createLogger = () => {
+  return {
+    logInformation: (message) => console.info(message),
+  };
 };
 
-export const addInfrastructure = () => {
-  const container = new Container();
-  // TODO: Access configuration for create instances
-  container.bind<ApiService>(TYPES.ApiService).to(ApiService);
-  container.bind<LoggerService>(TYPES.LoggerService).to(LoggerService);
+class ApiService {
+  constructor() {}
+  public fetchAll<T>(): Array<T> {
+    return [];
+  }
 
-  return { container, TYPES };
+  public dispose() {}
+}
+
+// Helper
+export type DIServices = {
+  store: ReturnType<typeof storeProvider>;
+  apiService: IApiService;
+  logger: ILogger;
 };
+
+export const DIContainer = createContainer<DIServices>({
+  injectionMode: "PROXY",
+}).register({
+  store: asFunction(storeProvider, {
+    lifetime: "SINGLETON",
+  }),
+  apiService: asClass(ApiService, {
+    lifetime: "SINGLETON",
+    dispose: (apiService) => {
+      apiService.dispose();
+    },
+  }),
+  logger: asFunction(createLogger, {
+    lifetime: "SINGLETON",
+  }),
+});

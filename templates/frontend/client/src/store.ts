@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { addInfrastructure } from "./dependencyInjection";
 import { jobOfferApi } from "./features/jobOffering/infrastructure/jobOfferApi";
 
@@ -6,29 +6,6 @@ import jobOfferReducer from "./features/jobOffering";
 import uiReducer from "./core/ui";
 import notificationReducer from "./core/notifications";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-
-const configuration = {}; // TODO
-const { container, TYPES } = addInfrastructure();
-
-// Fonction utilitaire pour récupérer les noms des paramètres d'une fonction
-const getParamNames = (func) => {
-  const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/gm;
-  const ARGUMENT_NAMES = /([^\s,]+)/g;
-  const fnStr = func.toString().replace(STRIP_COMMENTS, "");
-  const result = fnStr
-    .slice(fnStr.indexOf("(") + 1, fnStr.indexOf(")"))
-    .match(ARGUMENT_NAMES);
-  if (result === null) return [];
-  return result;
-};
-
-export const withInjectedServices = (middleware) => {
-  const paramNames = getParamNames(middleware);
-
-  const dependencies = paramNames.map((param) => container.get(TYPES[param]));
-
-  return middleware(...dependencies);
-};
 
 const coreMiddlewares = [];
 
@@ -45,6 +22,22 @@ const store = configureStore({
     getDefaultMiddleware().concat(jobOfferApi.middleware),
   devTools: process.env.NODE_ENV !== "production", // Activer les DevTools uniquement en mode développement
 });
+
+export type AppStore = typeof store;
+
+// Expose store as singleton
+export function storeProvider(): AppStore {
+  return store;
+}
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 setupListeners(store.dispatch);
 
