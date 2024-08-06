@@ -11,7 +11,7 @@
   "description": "Modèle de projet d'API.",
   "identity": "DotNet.Architecture.Solution.CSharp",
   "groupIdentity": "DotNet.Architecture.Backend",
-  "shortName": "bmm-sln",
+  "shortName": "bmm-api",
   "tags": {
     "language": "C#",
     "type": "project"
@@ -24,10 +24,6 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Whether to use SQLite instead of LocalDB."
-    },
-    "UseLocalDB": {
-      "type": "computed",
-      "value": "(!UseSQLite)"
     },
     "bmmRepositoryUrl": {
       "type": "generated",

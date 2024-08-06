@@ -1,5 +1,11 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Web.Api", "src\DotnetTemplate.Web.Api\DotnetTemplate.Web.Api.csproj", "{4E794E3E-06EF-4913-98A3-3C363EC572D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Api", "src\DotnetTemplate.Api\DotnetTemplate.Api.csproj", "{4E794E3E-06EF-4913-98A3-3C363EC572D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Application", "DotnetTemplate.Application\DotnetTemplate.Application.csproj", "{3D0198D7-F85E-4E7B-88E8-03F7635F4C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Infrastructure", "DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj", "{0E744A6A-9AAF-4F78-B054-17D356F56686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Domain", "DotnetTemplate.Domain\DotnetTemplate.Domain.csproj", "{5B411BC2-85EA-4E08-96E9-3C653D402AFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,5 +17,17 @@ Global
 		{4E794E3E-06EF-4913-98A3-3C363EC572D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E794E3E-06EF-4913-98A3-3C363EC572D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E794E3E-06EF-4913-98A3-3C363EC572D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0198D7-F85E-4E7B-88E8-03F7635F4C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0198D7-F85E-4E7B-88E8-03F7635F4C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0198D7-F85E-4E7B-88E8-03F7635F4C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0198D7-F85E-4E7B-88E8-03F7635F4C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E744A6A-9AAF-4F78-B054-17D356F56686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E744A6A-9AAF-4F78-B054-17D356F56686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E744A6A-9AAF-4F78-B054-17D356F56686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E744A6A-9AAF-4F78-B054-17D356F56686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B411BC2-85EA-4E08-96E9-3C653D402AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B411BC2-85EA-4E08-96E9-3C653D402AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B411BC2-85EA-4E08-96E9-3C653D402AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B411BC2-85EA-4E08-96E9-3C653D402AFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

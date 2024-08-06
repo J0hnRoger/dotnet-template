@@ -5,25 +5,75 @@
 
 ## Core Features 
 
-1. Logging/Observability - AppInsights 
+1. Minimal API Endpoints - native
 2. Quotas - native
-3. Minimal API Endpoints - native
+3. Clean Architecture structure - native
 4. Global Error Handling - middleware native
-5. Configuration - User Secrets + Azure KeyVault
+5. Configuration - AppSettings.json + User Secrets 
 6. Mapping DTO - Automapper
 7. Discoverability / API Documentation - Swagger/Open API
 8. Health Checks - native - middleware pour insérer des checks de dépendances externes (API/DB)
 9. Tests - xUnit / FluentAssertions / TestConfiguration + Integration WebApplicationFactory
-10. Load Testing - Benchmark.Net
 11. Validation - FluentValidation
 12. Resilience - Polly
-13. (optional) Feature Flag - Azure App Configuration
-14. (option) Authentication - Azure AD
-15. (option) Cache server - Azure Cosmos DB / SQL Server pour du cache distribué
-16. (option) Versioning - native
-17. (option) Persistence - EF Core 8
-18. (option) Containerization - Docker / docker-compose
+13. Logging/Observability - AppInsights
+14. (optional) Feature Flag - Azure App Configuration
+15. (option) User Authentication - OAuth2 via Azure AD Account | JWT/OpenID Server (Identity Server) | AspNetUser Core Identity
+16. (option) Infrastructure Authorization - MS Entra Azure AD Application
+16. (option) Cache server - Azure Cosmos DB / SQL Server pour du cache distribué
+17. (option) Versioning - native
+18. (option) Persistence - EF Core 8
+19. (option) Containerization - Docker / docker-compose
+
+## Template: Core 
+> Le template Core permet d'initialiser une API en facilitant et encourageant l'application des bonnes pratiques de développement
  
+usage: 
+`
+dotnet new 
+`
+### Features 
+
+1. Minimal API Endpoints - native
+2. Quotas - native
+3. Clean Architecture structure - native
+4. Global Error Handling - middleware native
+5. Configuration - AppSettings.json + User Secrets
+6. Mapping DTO - Automapper
+7. Discoverability / API Documentation - Swagger/Open API
+8. Health Checks - native - middleware pour insérer des checks de dépendances externes (API/DB)
+9. Tests - xUnit / FluentAssertions / TestConfiguration + Integration WebApplicationFactory
+11. Validation - FluentValidation
+12. Resilience - Polly
+13. (option) User Authentication - AspNetUser Core Identity
+14. (option) Persistence - EF Core 8 - SQLite | SQL Server
+ 
+### Tooling  
+15. Linter - SonarQube 
+ 
+## Template: AzurePaaS
+> Le template PaaS permet d'initialiser les configurations des services PaaS Azure nécessaires pour supporter les fonctionnalités avancées d'une application web 
+ 
+usage:
+`
+`
+## Features Azure
+
+13. Logging/Observability - AppInsights
+14. (optional) Feature Flag - Azure App Configuration
+15. (option) User Authentication - OAuth2 via Azure AD Account | JWT/OpenID Server (Identity Server) 
+16. (option) Application Authentication - MS Entra Azure AD Application
+16. (option) Cache server - Azure Cosmos DB / SQL Server pour du cache distribué
+
+## Bonus 
+
+10. Load Testing - Benchmark.Net
+11. .Net Aspire: dashboard de suivi
+12.  Containerization - Docker / docker-compose
+ 
+## Next
+- Utilisation de fichier Bicep pour générer les ressources Azure nécessaires : OAuth Azure AD App, Azure KeyVault reference, AppInsight 
+
 ## Build
 
 Run `dotnet build` to build the solution.

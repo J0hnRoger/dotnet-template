@@ -5,11 +5,12 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>8d85943b-47eb-45e9-a493-6e4fb507163a</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
-        <PackageReference Include="CSharpFunctionalExtensions" />
+        <PackageReference Include="FluentValidation" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
         <PackageReference Include="Swashbuckle.AspNetCore" />
     </ItemGroup>
@@ -21,7 +22,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Middlewares\" />
+      <ProjectReference Include="..\..\DotnetTemplate.Application\DotnetTemplate.Application.csproj" />
+      <ProjectReference Include="..\..\DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

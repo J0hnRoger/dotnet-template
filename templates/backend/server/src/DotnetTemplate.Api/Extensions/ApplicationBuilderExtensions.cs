@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning.ApiExplorer;
 
-namespace DotnetTemplate.Web.Api.Extensions;
+namespace DotnetTemplate.Api.Extensions;
 
 public static class ApplicationBuilderExtensions
 {

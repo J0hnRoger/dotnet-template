@@ -1,4 +1,4 @@
-﻿namespace DotnetTemplate.Web.Api.Extensions;
+﻿namespace DotnetTemplate.Api.Extensions;
 
 public static class MiddlewareExtensions
 {

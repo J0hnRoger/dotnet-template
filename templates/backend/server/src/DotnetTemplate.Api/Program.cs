@@ -1,14 +1,14 @@
 using System.Reflection;
 using Asp.Versioning;
 using Asp.Versioning.Builder;
-using DotnetTemplate.Web.Api.Extensions;
-using DotnetTemplate.Web.Api.Health;
-using DotnetTemplate.Web.Api.Infrastructure;
+using DotnetTemplate.Api.Extensions;
+using DotnetTemplate.Api.Health;
+using DotnetTemplate.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHealthChecks()
-    .AddCheck<DeliveryDatabaseHealthCheck>("Delivery Database");
+    .AddCheck<DatabaseHealthCheck>("Delivery Database");
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -16,7 +16,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddPermissions();
+builder.Services.AddPermissions(builder.Configuration);
+builder.Services.AddEntraAppAuthentication(builder.Configuration);
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
@@ -65,4 +66,7 @@ app.UseAuthentication();
 
 app.Run();
 
-public partial class Program;
+namespace DotnetTemplate.Api
+{
+    public partial class Program;
+}

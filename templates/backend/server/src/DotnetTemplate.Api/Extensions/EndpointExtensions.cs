@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using DotnetTemplate.Web.Api.Endpoints;
+using DotnetTemplate.Api.Endpoints;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace DotnetTemplate.Web.Api.Extensions;
+namespace DotnetTemplate.Api.Extensions;
 
 public static class EndpointExtensions
 {
@@ -30,7 +30,7 @@ public static class EndpointExtensions
 
         foreach (IEndpoint endpoint in endpoints)
         {
-            endpoint.MapEndpoint(builder);
+            endpoint.MapEndpoints(builder);
         }
 
         return app;

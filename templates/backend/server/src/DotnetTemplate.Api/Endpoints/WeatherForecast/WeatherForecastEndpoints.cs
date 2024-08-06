@@ -1,14 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 
-namespace DotnetTemplate.Web.Api.Endpoints.WeatherForecast;
+namespace DotnetTemplate.Api.Endpoints.WeatherForecast;
 
-public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
-
-public static class WeatherForecastEndpoints 
+public class WeatherForecastEndpoints : IEndpoint
 {
     static readonly string[] _summaries = new[]
     {
@@ -17,9 +12,9 @@ public static class WeatherForecastEndpoints
 
     static readonly string[] _validLocations = new[] {"France", "Spain", "Italia", "UK", "US"};
 
-    public static void MapWeatherForecastEndpoints(this IEndpointRouteBuilder app)
+    public void MapEndpoints(IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("api/weatherforecast")
+        var group = app.MapGroup("weatherforecast")
             .RequireRateLimiting("fixed")
             .WithOpenApi()
             .WithTags(Tags.WeatherForecast);

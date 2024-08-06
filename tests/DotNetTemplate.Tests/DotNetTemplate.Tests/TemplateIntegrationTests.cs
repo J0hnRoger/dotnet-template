@@ -10,7 +10,7 @@ public class TemplateIntegrationTests
     {
         UpdateNuGetTemplate();
         // Arrange
-        var templateName = "bmm-sln";
+        var templateName = "bmm-api";
         var projectName = "TestProject";
         var tempDirectory = "./tests";
         

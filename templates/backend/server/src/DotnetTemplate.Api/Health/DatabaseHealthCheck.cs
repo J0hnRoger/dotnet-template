@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace DotnetTemplate.Web.Api.Health;
+namespace DotnetTemplate.Api.Health;
 
-public class DeliveryDatabaseHealthCheck : IHealthCheck
+public class DatabaseHealthCheck : IHealthCheck
 {
     // private readonly ReadOnlyDeliveryContext _deliveryContext;
 
-    public DeliveryDatabaseHealthCheck()
+    public DatabaseHealthCheck()
     {
     }
 

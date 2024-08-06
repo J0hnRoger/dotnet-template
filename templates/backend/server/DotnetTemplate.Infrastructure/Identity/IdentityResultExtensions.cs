@@ -1,5 +1,7 @@
-﻿namespace DotnetTemplate.Web.Api.Infrastructure.Identity;
+﻿using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Identity;
+
+namespace DotnetTemplate.Infrastructure.Identity;
 
 public static class IdentityResultExtensions
 {
