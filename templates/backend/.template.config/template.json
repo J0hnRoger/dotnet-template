@@ -1,18 +1,17 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "John Roger",
+  "author": "Jonathan Roger",
   "classifications": [
     "Web",
     "SPA",
     "ASP.NET",
-    "Hangfire",
     "Clean Architecture"
   ],
   "name": "Dotnet Solution Templates",
-  "description": "A Clean Architecture Solution Template for creating a Single-Page Application (SPA) with ASP.NET Core.",
+  "description": "Modèle de projet d'API.",
   "identity": "DotNet.Architecture.Solution.CSharp",
   "groupIdentity": "DotNet.Architecture.Backend",
-  "shortName": "jr-sln",
+  "shortName": "bmm-sln",
   "tags": {
     "language": "C#",
     "type": "project"
@@ -20,30 +19,6 @@
   "sourceName": "DotnetTemplate",
   "preferNameDirectory": true,
   "symbols": {
-    "ClientFramework": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "React",
-          "description": "Use React"
-        },
-        {
-          "choice": "None",
-          "description": "Web API only"
-        }
-      ],
-      "defaultValue": "React",
-      "description": "The type of client framework to use"
-    },
-    "UseReact": {
-      "type": "computed",
-      "value": "(ClientFramework == \"React\")"
-    },
-    "UseApiOnly": {
-      "type": "computed",
-      "value": "(ClientFramework == \"None\")"
-    },
     "UseSQLite": {
       "type": "parameter",
       "datatype": "bool",
@@ -54,7 +29,7 @@
       "type": "computed",
       "value": "(!UseSQLite)"
     },
-    "jrRepositoryUrl": {
+    "bmmRepositoryUrl": {
       "type": "generated",
       "generator": "constant",
       "replaces": "jrRepositoryUrl",
@@ -65,7 +40,7 @@
     "caPackageVersion": {
       "type": "generated",
       "generator": "constant",
-      "replaces": "jrPackageVersion",
+      "replaces": "bmmPackageVersion",
       "parameters": {
         "value": "8.0.5"
       }
@@ -90,31 +65,6 @@
       "modifiers": [
         {
           "exclude": []
-        },
-        {
-          "condition": "(UseAngular)",
-          "exclude": [
-            "src/Web/ClientApp-React/**",
-            "src/Web/Endpoints/Users.cs",
-            "src/Web/Templates/**",
-            "src/Web/config-react.nswag",
-            "src/Web/config-webapi.nswag",
-            "src/Web/Web-webapi.http"
-          ]
-        },
-        {
-          "condition": "(UseReact)",
-          "exclude": [
-            "src/Web/ClientApp/**",
-            "src/Web/Endpoints/Users.cs",
-            "src/Web/config.nswag",
-            "src/Web/config-webapi.nswag",
-            "src/Web/Web-webapi.http"
-          ],
-          "rename": {
-            "config-react.nswag": "config.nswag",
-            "ClientApp-React": "ClientApp"
-          }
         },
         {
           "condition": "(UseApiOnly)",

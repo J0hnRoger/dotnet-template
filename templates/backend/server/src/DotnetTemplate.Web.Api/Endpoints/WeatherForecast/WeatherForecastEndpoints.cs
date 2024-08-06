@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using IResult = Microsoft.AspNetCore.Http.IResult;
 
 namespace DotnetTemplate.Web.Api.Endpoints.WeatherForecast;
 

@@ -481,3 +481,5 @@ $RECYCLE.BIN/
 
 # Rider
 .idea/*
+templates/.idea
+templates/backend/server/.idea

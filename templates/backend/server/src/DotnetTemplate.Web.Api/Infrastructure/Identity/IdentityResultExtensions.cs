@@ -7,6 +7,6 @@ public static class IdentityResultExtensions
     {
         return result.Succeeded
             ? Result.Success()
-            : Result.Failure(result.Errors.Select(e => e.Description));
+            : Result.Failure(string.Join(",", result.Errors.Select(e => e.Description)));
     }
 }
