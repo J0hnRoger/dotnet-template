@@ -19,6 +19,79 @@
   "sourceName": "DotnetTemplate",
   "preferNameDirectory": true,
   "symbols": {
+    "Variant": {
+      "type": "parameter",
+      "isRequired": true,
+      "datatype": "choice",
+      "choices": [
+        { "choice": "Core", "description": "Core variant with essential features." },
+        { "choice": "PaaS", "description": "PaaS variant with additional Azure features." }
+      ],
+      "defaultValue": "Core",
+      "description": "Choose the variant of the template."
+    },
+    "UserAuthentication": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false,
+      "description": "Include user authentication using ASP.NET Core Identity."
+    },
+    "Persistence": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        { "choice": "None", "description": "No persistence." },
+        { "choice": "SQLite", "description": "Use SQLite for persistence." },
+        { "choice": "SQLServer", "description": "Use SQL Server for persistence." }
+      ],
+      "defaultValue": "None",
+      "description": "Choose the persistence layer."
+    },
+    "LoggingObservability": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false,
+      "description": "Include Application Insights for logging and observability.",
+      "condition": "(Variant == 'PaaS')"
+    },
+    "FeatureFlag": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false,
+      "description": "Include Azure App Configuration for feature flags.",
+      "condition": "(Variant == 'PaaS')"
+    },
+    "OAuth2Authentication": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        { "choice": "None", "description": "No OAuth2 authentication." },
+        { "choice": "JWT", "description": "Use JWT/OpenID Server for authentication." },
+        { "choice": "AzureAD", "description": "Use Azure AD for authentication." }
+      ],
+      "defaultValue": "None",
+      "description": "Choose the OAuth2 authentication method.",
+      "condition": "(Variant == 'PaaS')"
+    },
+    "AppAuthentication": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false,
+      "description": "Include MS Entra Azure AD Application authentication.",
+      "condition": "(Variant == 'PaaS')"
+    },
+    "CacheServer": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        { "choice": "None", "description": "No cache server." },
+        { "choice": "CosmosDB", "description": "Use Azure Cosmos DB for distributed cache." },
+        { "choice": "SQLServer", "description": "Use SQL Server for distributed cache." }
+      ],
+      "defaultValue": "None",
+      "description": "Choose the cache server.",
+      "condition": "(Variant == 'PaaS')"
+    },
     "UseSQLite": {
       "type": "parameter",
       "datatype": "bool",
@@ -40,6 +113,12 @@
       "parameters": {
         "value": "8.0.5"
       }
+    },
+    "Sample": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": true,
+      "description": "Generate sample feature for budget management."
     }
   },
   "sources": [
@@ -65,13 +144,13 @@
         {
           "condition": "(UseApiOnly)",
           "exclude": [
-            "src/Web/ClientApp/**",
-            "src/Web/ClientApp-React/**",
-            "src/Web/Templates/**",
-            "src/Web/config.nswag",
-            "src/Web/config-react.nswag",
-            "src/Web/Web.http",
-            "tests/Web.AcceptanceTests/**"
+            "server/src/Web/ClientApp/**",
+            "server/src/Web/ClientApp-React/**",
+            "server/src/Web/Templates/**",
+            "server/src/Web/config.nswag",
+            "server/src/Web/config-react.nswag",
+            "server/src/Web/Web.http",
+            "server/tests/Web.AcceptanceTests/**"
           ],
           "rename": {
             "config-webapi.nswag": "config.nswag",
@@ -81,25 +160,31 @@
         {
           "condition": "(UseLocalDB)",
           "exclude": [
-            "src/Infrastructure/Data/SQLite/**",
-            "src/Web/appsettings.SQLite.json",
-            "src/Web/app.db",
-            "tests/Application.FunctionalTests/SqliteTestDatabase.cs"
+            "server/src/Infrastructure/Data/SQLite/**",
+            "server/src/Web/appsettings.SQLite.json",
+            "server/src/Web/app.db",
+            "server/tests/Application.FunctionalTests/SqliteTestDatabase.cs"
           ]
         },
         {
           "condition": "(UseSQLite)",
           "exclude": [
-            "src/Infrastructure/Data/Migrations/**",
-            "src/Web/appsettings.json",
-            "tests/Application.FunctionalTests/SqlServerTestDatabase.cs",
-            "tests/Application.FunctionalTests/TestcontainersTestDatabase.cs"
+            "server/src/Infrastructure/Data/Migrations/**",
+            "server/src/Web/appsettings.json",
+            "server/tests/Application.FunctionalTests/SqlServerTestDatabase.cs",
+            "server/tests/Application.FunctionalTests/TestcontainersTestDatabase.cs"
           ],
           "rename": {
             "src/Infrastructure/Data/SQLite/": "src/Infrastructure/Data/Migrations/",
             "appsettings.SQLite.json": "appsettings.json",
             "TestDatabase.Sqlite.cs": "TestDatabase.cs"
           }
+        },
+        {
+          "condition": "(Sample == false)",
+          "exclude": [
+            "server/src/**/BudgetManagement/**/*"
+          ]
         }
       ]
     }

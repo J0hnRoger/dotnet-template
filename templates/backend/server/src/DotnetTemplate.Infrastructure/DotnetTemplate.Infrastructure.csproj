@@ -13,6 +13,11 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Http.Polly" />
       <PackageReference Include="Microsoft.Identity.Web" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Database\Migrations\" />
     </ItemGroup>
 
 </Project>

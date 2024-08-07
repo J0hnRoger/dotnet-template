@@ -1,11 +1,11 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Api", "src\DotnetTemplate.Api\DotnetTemplate.Api.csproj", "{4E794E3E-06EF-4913-98A3-3C363EC572D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Application", "DotnetTemplate.Application\DotnetTemplate.Application.csproj", "{3D0198D7-F85E-4E7B-88E8-03F7635F4C14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Application", "src\DotnetTemplate.Application\DotnetTemplate.Application.csproj", "{3D0198D7-F85E-4E7B-88E8-03F7635F4C14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Infrastructure", "DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj", "{0E744A6A-9AAF-4F78-B054-17D356F56686}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Infrastructure", "src\DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj", "{0E744A6A-9AAF-4F78-B054-17D356F56686}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Domain", "DotnetTemplate.Domain\DotnetTemplate.Domain.csproj", "{5B411BC2-85EA-4E08-96E9-3C653D402AFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetTemplate.Domain", "src\DotnetTemplate.Domain\DotnetTemplate.Domain.csproj", "{5B411BC2-85EA-4E08-96E9-3C653D402AFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

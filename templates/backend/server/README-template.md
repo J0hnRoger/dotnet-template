@@ -3,36 +3,27 @@
 ## Stack
 - .Net Core 8
 
-## Core Features 
+## Full Features 
 
-1. Minimal API Endpoints - native
-2. Quotas - native
-3. Clean Architecture structure - native
-4. Global Error Handling - middleware native
-5. Configuration - AppSettings.json + User Secrets 
-6. Mapping DTO - Automapper
-7. Discoverability / API Documentation - Swagger/Open API
-8. Health Checks - native - middleware pour insérer des checks de dépendances externes (API/DB)
-9. Tests - xUnit / FluentAssertions / TestConfiguration + Integration WebApplicationFactory
-11. Validation - FluentValidation
-12. Resilience - Polly
-13. Logging/Observability - AppInsights
-14. (optional) Feature Flag - Azure App Configuration
-15. (option) User Authentication - OAuth2 via Azure AD Account | JWT/OpenID Server (Identity Server) | AspNetUser Core Identity
-16. (option) Infrastructure Authorization - MS Entra Azure AD Application
-16. (option) Cache server - Azure Cosmos DB / SQL Server pour du cache distribué
-17. (option) Versioning - native
-18. (option) Persistence - EF Core 8
-19. (option) Containerization - Docker / docker-compose
-
+<!--#if (Variant == 'Core') -->
 ## Template: Core 
 > Le template Core permet d'initialiser une API en facilitant et encourageant l'application des bonnes pratiques de développement
  
 usage: 
 `
-dotnet new 
+dotnet new bmm-api
 `
-### Features 
+<!--#else -->
+## Template: AzurePaaS
+> Le template PaaS permet d'initialiser les configurations des services PaaS Azure nécessaires pour supporter les fonctionnalités avancées d'une application web
+
+usage:
+`
+dotnet new bmm-api
+`
+<!--#endif -->
+
+### Core Features
 
 1. Minimal API Endpoints - native
 2. Quotas - native
@@ -47,32 +38,29 @@ dotnet new
 12. Resilience - Polly
 13. (option) User Authentication - AspNetUser Core Identity
 14. (option) Persistence - EF Core 8 - SQLite | SQL Server
- 
-### Tooling  
-15. Linter - SonarQube 
- 
-## Template: AzurePaaS
-> Le template PaaS permet d'initialiser les configurations des services PaaS Azure nécessaires pour supporter les fonctionnalités avancées d'une application web 
- 
-usage:
-`
-`
+16. (option) Infrastructure Authorization - MS Entra Azure AD Application
+17. (option) Versioning - native
+
+<!--#if (Variant == 'PaaS') -->
 ## Features Azure
 
 13. Logging/Observability - AppInsights
 14. (optional) Feature Flag - Azure App Configuration
-15. (option) User Authentication - OAuth2 via Azure AD Account | JWT/OpenID Server (Identity Server) 
+15. (option) User Authentication - OAuth2 via Azure AD Account | JWT/OpenID Server (Identity Server)
 16. (option) Application Authentication - MS Entra Azure AD Application
 16. (option) Cache server - Azure Cosmos DB / SQL Server pour du cache distribué
 
+<!--#endif-->
+### Tooling  
+. Linter - SonarQube 
+ 
 ## Bonus 
-
-10. Load Testing - Benchmark.Net
-11. .Net Aspire: dashboard de suivi
-12.  Containerization - Docker / docker-compose
  
 ## Next
-- Utilisation de fichier Bicep pour générer les ressources Azure nécessaires : OAuth Azure AD App, Azure KeyVault reference, AppInsight 
+. Utilisation de fichier Bicep pour générer les ressources Azure nécessaires : OAuth Azure AD App, Azure KeyVault reference, AppInsight 
+. Load Testing - Benchmark.Net
+. .Net Aspire: dashboard de suivi
+.  Containerization - Docker / docker-compose
 
 ## Build
 

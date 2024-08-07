@@ -24,6 +24,11 @@
     <ItemGroup>
       <ProjectReference Include="..\..\DotnetTemplate.Application\DotnetTemplate.Application.csproj" />
       <ProjectReference Include="..\..\DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj" />
+      <ProjectReference Include="..\DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Endpoints\Transactions\" />
     </ItemGroup>
 
 </Project>
