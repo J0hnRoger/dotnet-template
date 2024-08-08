@@ -4,7 +4,6 @@ using DotnetTemplate.Api;
 using DotnetTemplate.Api.Extensions;
 using DotnetTemplate.Application;
 using DotnetTemplate.Infrastructure;
-using DotnetTemplate.Infrastructure.Database;
 using DotnetTemplate.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,13 +45,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+#if (UserAuthentication)
+app.UsePermissions();
+#endif
+
 app.UseSwaggerWithUi();
 
 app.UseExceptionHandler();
-app.UseAuthentication();
-
-app.UseAuthorization();
-app.UseAuthentication();
 
 app.Run();
 

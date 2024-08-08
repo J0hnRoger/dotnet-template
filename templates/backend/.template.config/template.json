@@ -130,6 +130,9 @@
         "**/*.filelist",
         "**/*.user",
         "**/*.lock.json",
+        "**/*.db",
+        "**/*.db-shm",
+        "**/*.db-wal",
         "*.nuspec",
         ".vs/**", ".git/**", ".idea/**", ".scripts/publish.ps1"
       ],

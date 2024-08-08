@@ -483,3 +483,11 @@ $RECYCLE.BIN/
 .idea/*
 templates/.idea
 templates/backend/server/.idea
+
+# SQlite
+**/*.db
+**/*.db3
+**/*.sqlite
+**/*.sqlite3
+**/*.db-shm
+**/*.db-wal

@@ -11,7 +11,14 @@ public static class AuthorizationExtensions
             .AddBearerToken(IdentityConstants.BearerScheme);
         
         services.AddAuthorizationBuilder();
-       
+        
         return services;
+    }
+
+    public static IApplicationBuilder UsePermissions(this IApplicationBuilder app)
+    {
+        app.UseAuthorization();
+        app.UseAuthentication();
+        return app;
     }
 }
