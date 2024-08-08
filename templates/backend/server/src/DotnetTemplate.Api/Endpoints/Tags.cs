@@ -3,5 +3,5 @@
 public static class Tags
 {
     public const string Users = "Users";
-    public const string WeatherForecast = "WheatherForecast";
+    public const string Transactions = "Transactions";
 }

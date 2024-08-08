@@ -11,7 +11,7 @@
  
 usage: 
 `
-dotnet new bmm-api
+dotnet new bmm-api -V Core 
 `
 <!--#else -->
 ## Template: AzurePaaS
@@ -19,7 +19,7 @@ dotnet new bmm-api
 
 usage:
 `
-dotnet new bmm-api
+dotnet new bmm-api -V PaaS 
 `
 <!--#endif -->
 
@@ -36,6 +36,7 @@ dotnet new bmm-api
 9. Tests - xUnit / FluentAssertions / TestConfiguration + Integration WebApplicationFactory
 11. Validation - FluentValidation
 12. Resilience - Polly
+13. (option) CQRS - Dapper  
 13. (option) User Authentication - AspNetUser Core Identity
 14. (option) Persistence - EF Core 8 - SQLite | SQL Server
 16. (option) Infrastructure Authorization - MS Entra Azure AD Application
@@ -65,6 +66,15 @@ dotnet new bmm-api
 ## Build
 
 Run `dotnet build` to build the solution.
+## Migrations 
+
+```
+dotnet ef database update --context IdentityContext --verbose --project DotnetTemplate.Infrastructure --startup-project DotnetTemplate.Api 
+```
+
+```
+dotnet ef database update --context IdentityContext --verbose --project DotnetTemplate.Infrastructure --startup-project DotnetTemplate.Api 
+```
 
 ## Run
 

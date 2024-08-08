@@ -8,10 +8,19 @@
         <UserSecretsId>8d85943b-47eb-45e9-a493-6e4fb507163a</UserSecretsId>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;UserAuthentication</DefineConstants>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
-        <PackageReference Include="FluentValidation" />
+        <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
         <PackageReference Include="Swashbuckle.AspNetCore" />
     </ItemGroup>
 
@@ -22,13 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\DotnetTemplate.Application\DotnetTemplate.Application.csproj" />
-      <ProjectReference Include="..\..\DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj" />
       <ProjectReference Include="..\DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Endpoints\Transactions\" />
     </ItemGroup>
 
 </Project>

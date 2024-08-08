@@ -84,15 +84,14 @@
       "type": "parameter",
       "datatype": "choice",
       "choices": [
-        { "choice": "None", "description": "No cache server." },
+        { "choice": "InMemory", "description": "No cache server." },
         { "choice": "CosmosDB", "description": "Use Azure Cosmos DB for distributed cache." },
         { "choice": "SQLServer", "description": "Use SQL Server for distributed cache." }
       ],
-      "defaultValue": "None",
+      "defaultValue": "InMemory",
       "description": "Choose the cache server.",
-      "condition": "(Variant == 'PaaS')"
     },
-    "UseSQLite": {
+    "UseSQLServer": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
@@ -158,7 +157,7 @@
           }
         },
         {
-          "condition": "(UseLocalDB)",
+          "condition": "(UseSQLServer)",
           "exclude": [
             "server/src/Infrastructure/Data/SQLite/**",
             "server/src/Web/appsettings.SQLite.json",
@@ -167,7 +166,7 @@
           ]
         },
         {
-          "condition": "(UseSQLite)",
+          "condition": "(!UseSQLServer)",
           "exclude": [
             "server/src/Infrastructure/Data/Migrations/**",
             "server/src/Web/appsettings.json",

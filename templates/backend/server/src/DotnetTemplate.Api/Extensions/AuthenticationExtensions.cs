@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace DotnetTemplate.Api.Extensions;
 
@@ -6,32 +6,12 @@ public static class AuthorizationExtensions
 {
     public static IServiceCollection AddPermissions(this IServiceCollection services, ConfigurationManager builderConfiguration)
     {
-        services.AddAuthentication(); // on le garde vide pour ne spécifier aucune Auth par défaut
-            // // https://github.com/dotnet/aspnetcore/issues/26002
-            // .AddJwtBearer(options =>
-            // {
-            //     options.Authority = builder.Configuration["IdentityUri"];
-            //     options.TokenValidationParameters.ValidateAudience = false;
-            //     options.TokenValidationParameters.ValidateIssuer = !builder.Environment.IsDevelopment();
-            //     options.IncludeErrorDetails = builder.Configuration.GetValue<bool>("ShowIdentityDetails");
-            // })
-            // .AddMicrosoftIdentityWebApi(builder.Configuration, jwtBearerScheme: "AzureAd",
-            //     subscribeToJwtBearerMiddlewareDiagnosticsEvents: true);
-
-        services.AddAuthorization(options =>
-        {
-            options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
-                .AddAuthenticationSchemes("Default")
-                .Build();
-
-            options.AddPolicy("AzureAdPolicy", policy =>
-            {
-                policy.AuthenticationSchemes.Add("AzureAd");
-                policy.RequireAuthenticatedUser();
-            });
-        });
+        // Identity
+        services.AddAuthentication()
+            .AddBearerToken(IdentityConstants.BearerScheme);
         
+        services.AddAuthorizationBuilder();
+       
         return services;
     }
 }

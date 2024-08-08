@@ -6,18 +6,37 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DefineConstants>TRACE;UserAuthentication</DefineConstants>
+    </PropertyGroup>
+    
     <ItemGroup>
       <ProjectReference Include="..\DotnetTemplate.Application\DotnetTemplate.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="AspNetCore.HealthChecks.SqlServer" />
+      <PackageReference Include="Dapper" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.Extensions.Caching.Memory" />
+      <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
       <PackageReference Include="Microsoft.Extensions.Http.Polly" />
       <PackageReference Include="Microsoft.Identity.Web" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+        <!--#if (!UseSQLServer)-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+        <!--#endif-->
+        <!--#if (UseSQLServer)-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+        <!--#endif-->
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Database\Migrations\" />
+      <Folder Include="Identity\Migrations\" />
     </ItemGroup>
 
 </Project>
