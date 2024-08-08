@@ -1,0 +1,1 @@
+global using DotnetTemplate.Tests.Common;
