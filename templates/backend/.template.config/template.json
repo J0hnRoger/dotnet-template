@@ -21,7 +21,7 @@
   "symbols": {
     "Variant": {
       "type": "parameter",
-      "isRequired": true,
+      "isRequired": false,
       "datatype": "choice",
       "choices": [
         { "choice": "Core", "description": "Core variant with essential features." },
@@ -97,6 +97,12 @@
       "defaultValue": "false",
       "description": "Whether to use SQLite instead of LocalDB."
     },
+    "UseSample": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Generate sample feature for budget management."
+    },
     "bmmRepositoryUrl": {
       "type": "generated",
       "generator": "constant",
@@ -112,12 +118,6 @@
       "parameters": {
         "value": "8.0.5"
       }
-    },
-    "Sample": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": true,
-      "description": "Generate sample feature for budget management."
     }
   },
   "sources": [
@@ -140,9 +140,6 @@
         "README-template.md": "README.md"
       },
       "modifiers": [
-        {
-          "exclude": []
-        },
         {
           "condition": "(UseApiOnly)",
           "exclude": [
@@ -171,10 +168,7 @@
         {
           "condition": "(!UseSQLServer)",
           "exclude": [
-            "server/src/Infrastructure/Data/Migrations/**",
-            "server/src/Web/appsettings.json",
-            "server/tests/Application.FunctionalTests/SqlServerTestDatabase.cs",
-            "server/tests/Application.FunctionalTests/TestcontainersTestDatabase.cs"
+            "server/src/DotnetTemplate.Infrastructure/Data/Migrations/**"
           ],
           "rename": {
             "src/Infrastructure/Data/SQLite/": "src/Infrastructure/Data/Migrations/",
@@ -183,9 +177,13 @@
           }
         },
         {
-          "condition": "(Sample == false)",
+          "condition": "(!UseSample)",
           "exclude": [
-            "server/src/**/BudgetManagement/**/*"
+            "server/src/**/BudgetManagement/**/*",
+            "server/src/*.Api/Endpoints/Transactions/**",
+            "server/src/*.Infrastructure/Database/Configurations/**",
+            "server/src/*.Infrastructure/Database/Migrations/**",
+            "server/src/*.Infrastructure/Repositories/**"
           ]
         }
       ]

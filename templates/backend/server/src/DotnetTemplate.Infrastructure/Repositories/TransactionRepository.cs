@@ -1,7 +1,8 @@
 ﻿using DotnetTemplate.Domain.BudgetManagement;
+using DotnetTemplate.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace DotnetTemplate.Infrastructure.Database.Repositories;
+namespace DotnetTemplate.Infrastructure.Repositories;
 
 public class TransactionRepository(ApplicationDbContext context) : ITransactionRepository
 {

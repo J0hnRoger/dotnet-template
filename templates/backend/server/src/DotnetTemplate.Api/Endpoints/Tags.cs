@@ -2,6 +2,7 @@
 
 public static class Tags
 {
-    public const string Users = "Users";
+#if (UseSample)
     public const string Transactions = "Transactions";
+#endif
 }

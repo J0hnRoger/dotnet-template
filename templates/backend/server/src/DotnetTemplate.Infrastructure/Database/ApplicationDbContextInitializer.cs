@@ -1,4 +1,6 @@
-﻿using DotnetTemplate.Domain.BudgetManagement;
+﻿#if (UseSample)
+using DotnetTemplate.Domain.BudgetManagement;
+#endif
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -44,6 +46,8 @@ public class ApplicationDbContextInitializer
     private async Task TrySeedAsync()
     {
         // Default data
+        
+        #if (UseSample)
         if (!_context.Transactions.Any())
         {
             _context.Transactions.Add(new Transaction()
@@ -70,5 +74,6 @@ public class ApplicationDbContextInitializer
         
             await _context.SaveChangesAsync();
         }
+        #endif
     }
 }

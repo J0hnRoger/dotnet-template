@@ -1,17 +1,20 @@
 ﻿using Dapper;
 using DotnetTemplate.Application.Common.Caching;
 using DotnetTemplate.Application.Common.Database;
-using DotnetTemplate.Domain.BudgetManagement;
 using DotnetTemplate.Domain.Common;
 using DotnetTemplate.Infrastructure.Caching;
 using DotnetTemplate.Infrastructure.Database;
-using DotnetTemplate.Infrastructure.Database.Repositories;
 using DotnetTemplate.Infrastructure.Identity;
 using DotnetTemplate.Infrastructure.Time;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+#if (UseSample)
+using DotnetTemplate.Infrastructure.Repositories;
+using DotnetTemplate.Domain.BudgetManagement;
+#endif
 
 namespace DotnetTemplate.Infrastructure;
 
@@ -82,8 +85,9 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
+#if (UseSample)
         services.AddScoped<ITransactionRepository, TransactionRepository>();
-
+#endif
         return services;
     }
 
