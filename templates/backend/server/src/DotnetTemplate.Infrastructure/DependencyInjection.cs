@@ -27,7 +27,7 @@ public static class DependencyInjection
             .AddServices()
             .AddDatabase(configuration)
             .AddCaching(configuration)
-#if (UserAuthentication)
+#if (UseAuthentication)
             .AddIdentityDatabase(configuration)
 #endif
             .AddHealthChecks(configuration);
@@ -44,7 +44,7 @@ public static class DependencyInjection
     {
         string? connectionString = configuration.GetConnectionString("IdentityConnection");
 #if (UseSQLServer)
-        services.AddDbContext<IdentityDbContext<ApplicationUser>>(x => x.UseSqlServer());
+        services.AddDbContext<IdentityContext<ApplicationUser>>(x => x.UseSqlServer());
 #else
         services.AddDbContext<IdentityContext>(x => x.UseSqlite(connectionString));
 #endif
@@ -106,8 +106,13 @@ public static class DependencyInjection
     {
         services
             .AddHealthChecks()
-            .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!);
-        // .AddRedis(configuration.GetConnectionString("Cache")!);
+#if (UseSQLServer)
+            .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!)
+#endif
+#if (UseCache)
+        .AddRedis(configuration.GetConnectionString("Cache")!)
+#endif
+            ;
 
         return services;
     }

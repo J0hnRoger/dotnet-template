@@ -4,7 +4,8 @@ namespace DotnetTemplate.Api.Extensions;
 
 public static class AuthorizationExtensions
 {
-    public static IServiceCollection AddPermissions(this IServiceCollection services, ConfigurationManager builderConfiguration)
+    public static IServiceCollection AddPermissions(this IServiceCollection services, 
+        ConfigurationManager builderConfiguration)
     {
         // Identity
         services.AddAuthentication()
@@ -17,8 +18,9 @@ public static class AuthorizationExtensions
 
     public static IApplicationBuilder UsePermissions(this IApplicationBuilder app)
     {
-        app.UseAuthorization();
         app.UseAuthentication();
+        app.UseAuthorization();
+        
         return app;
     }
 }

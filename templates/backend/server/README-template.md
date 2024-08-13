@@ -9,10 +9,6 @@
 ## Template: Core 
 > Le template Core permet d'initialiser une API en facilitant et encourageant l'application des bonnes pratiques de développement
  
-usage: 
-`
-dotnet new bmm-api -V Core 
-`
 <!--#else -->
 ## Template: AzurePaaS
 > Le template PaaS permet d'initialiser les configurations des services PaaS Azure nécessaires pour supporter les fonctionnalités avancées d'une application web
@@ -39,7 +35,6 @@ dotnet new bmm-api -V PaaS
 13. (option) CQRS - Dapper  
 13. (option) User Authentication - AspNetUser Core Identity
 14. (option) Persistence - EF Core 8 - SQLite | SQL Server
-16. (option) Infrastructure Authorization - MS Entra Azure AD Application
 17. (option) Versioning - native
 
 <!--#if (Variant == 'PaaS') -->

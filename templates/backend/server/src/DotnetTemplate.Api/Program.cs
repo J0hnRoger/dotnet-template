@@ -32,7 +32,7 @@ RouteGroupBuilder versionedGroup = app
 
 app.MapEndpoints(versionedGroup);
 
-#if (UserAuthentication)
+#if (UseAuthentication)
 app.MapIdentityApi<ApplicationUser>();
 #endif
 
@@ -46,7 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-#if (UserAuthentication)
+#if (UseAuthentication)
 app.UsePermissions();
 #endif
 

@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DefineConstants>TRACE;UserAuthentication;UseSample</DefineConstants>
+      <DefineConstants>TRACE;UseAuthentication;UseSample</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>

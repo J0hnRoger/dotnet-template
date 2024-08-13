@@ -13,7 +13,7 @@ public class TransactionEndpoints : IEndpoint
     public void MapEndpoints(IEndpointRouteBuilder app)
     {
         _group = app.MapGroup("transactions")
-            #if (UserAuthentication)
+            #if (UseAuthentication)
             .RequireAuthorization()
             #endif
             .RequireRateLimiting("fixed")

@@ -27,7 +27,7 @@ public static class WebDependencyInjection
 
         services.AddSwaggerGen(opt =>
         {
-#if (UserAuthentication)
+#if (UseAuthentication)
             opt.AddSecurityDefinition("Bearer",
                 new OpenApiSecurityScheme
                 {
@@ -41,9 +41,7 @@ public static class WebDependencyInjection
 #endif
         });
 
-        services.AddHttpContextAccessor();
-
-#if (UserAuthentication)
+#if (UseAuthentication)
         services.AddPermissions(configuration);
 #endif
 

@@ -18,7 +18,7 @@ public static class MigrationExtensions
 
         await app.SeedDatabaseAsync();
 
-#if(UserAuthentication)
+#if(UseAuthentication)
         using IdentityContext identityContext =
             scope.ServiceProvider.GetRequiredService<IdentityContext>();
 

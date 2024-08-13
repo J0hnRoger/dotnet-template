@@ -30,7 +30,7 @@
       "defaultValue": "Core",
       "description": "Choose the variant of the template."
     },
-    "UserAuthentication": {
+    "UseAuthentication": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": false,
@@ -47,7 +47,7 @@
       "defaultValue": "None",
       "description": "Choose the persistence layer."
     },
-    "LoggingObservability": {
+    "UseObservability": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": false,
@@ -80,16 +80,17 @@
       "description": "Include MS Entra Azure AD Application authentication.",
       "condition": "(Variant == 'PaaS')"
     },
-    "CacheServer": {
+    "UseCache": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
         { "choice": "InMemory", "description": "No cache server." },
         { "choice": "CosmosDB", "description": "Use Azure Cosmos DB for distributed cache." },
-        { "choice": "SQLServer", "description": "Use SQL Server for distributed cache." }
+        { "choice": "SQLServer", "description": "Use SQL Server for distributed cache." },
+        { "choice": "Redis", "description": "Use SQL Server for distributed cache." }
       ],
       "defaultValue": "InMemory",
-      "description": "Choose the cache server.",
+      "description": "Choose the cache server."
     },
     "UseSQLServer": {
       "type": "parameter",
@@ -183,7 +184,9 @@
             "server/src/*.Api/Endpoints/Transactions/**",
             "server/src/*.Infrastructure/Database/Configurations/**",
             "server/src/*.Infrastructure/Database/Migrations/**",
-            "server/src/*.Infrastructure/Repositories/**"
+            "server/src/*.Infrastructure/Repositories/**",
+            "server/tests/**/BudgetManagement/**/*",
+            "server/tests/**/Integration/Api/EndpointTests/TransactionEndpointTests.cs"
           ]
         }
       ]
