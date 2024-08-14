@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text;
 using FluentAssertions;
 
 namespace DotNetTemplate.Tests;
@@ -10,58 +11,78 @@ public class TemplateIntegrationTests
     {
         UpdateNuGetTemplate();
         // Arrange
-        var templateName = "bmm-api";
+        var templateName = "dotnet-api";
         var projectName = "TestProject";
         var tempDirectory = "./tests";
-        
+
+        if (Directory.Exists(tempDirectory))
+        {
+            Directory.Delete(tempDirectory, true);
+        }
+
+        // The template should be created in less than 30sec  
+        var timeout = TimeSpan.FromSeconds(100);
         Directory.CreateDirectory(tempDirectory);
 
-        try
+        var process = Process.Start(new ProcessStartInfo
         {
-            var process = Process.Start(new ProcessStartInfo
-            {
-                FileName = "dotnet",
-                Arguments = $"new {templateName} -n {projectName}",
-                WorkingDirectory = tempDirectory,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            });
+            FileName = "dotnet",
+            Arguments = $"new {templateName} -n {projectName}",
+            WorkingDirectory = tempDirectory,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        });
 
-            process!.WaitForExit();
+        if (process!.WaitForExit((int)timeout.TotalMilliseconds))
+        {
             var output = process.StandardOutput.ReadToEnd();
             var error = process.StandardError.ReadToEnd();
 
             process.ExitCode.Should().Be(0, because: error);
-            Directory.Exists(Path.Combine(tempDirectory, projectName)).Should().BeTrue();
-
-            var projectDirectory = Path.Combine(tempDirectory, projectName + "\\server");
-
-            var buildProcess = Process.Start(new ProcessStartInfo
-            {
-                FileName = "dotnet",
-                Arguments = $"build {projectName}.sln",
-                WorkingDirectory = projectDirectory,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            });
-
-            buildProcess!.WaitForExit();
-            var buildOutput = buildProcess.StandardOutput.ReadToEnd();
-            var buildError = buildProcess.StandardError.ReadToEnd();
-
-            buildProcess.ExitCode.Should().Be(0, because: buildOutput);
         }
-        finally
+        else
         {
-            // Clean up
-            if (Directory.Exists(tempDirectory))
-            {
-                Directory.Delete(tempDirectory, true);
-            }
+            process.Kill();
+            throw new TimeoutException("Le processus de création du projet a dépassé le délai imparti.");
+        }
+
+        Directory.Exists(Path.Combine(tempDirectory, projectName)).Should().BeTrue();
+
+        var projectDirectory = Path.Combine(tempDirectory, projectName + "\\server");
+
+        var buildProcess = Process.Start(new ProcessStartInfo
+        {
+            FileName = "dotnet",
+            Arguments = $"build {projectName}.sln",
+            WorkingDirectory = projectDirectory,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        });
+
+        var buildOutput = new StringBuilder();
+        var buildError = new StringBuilder();
+
+        buildProcess.OutputDataReceived += (sender, args) => buildOutput.AppendLine(args.Data);
+        buildProcess.ErrorDataReceived += (sender, args) => buildError.AppendLine(args.Data);
+
+        buildProcess.Start();
+        buildProcess.BeginOutputReadLine();
+        buildProcess.BeginErrorReadLine();
+
+        // Doesn't work for some reason - it's timeout
+        if (buildProcess!.WaitForExit((int)timeout.TotalMilliseconds))
+        {
+            buildProcess.WaitForExit();
+            buildProcess.ExitCode.Should().Be(0, because: buildOutput.ToString());
+        }
+        else
+        {
+            buildProcess.Kill();
+            throw new TimeoutException("Le processus de création du projet a dépassé le délai imparti.");
         }
     }
 
@@ -75,10 +96,10 @@ public class TemplateIntegrationTests
         powerShell.StartInfo.RedirectStandardOutput = true;
         powerShell.Start();
         string output = powerShell.StandardOutput.ReadToEnd();
-            
+
         Console.WriteLine(output);
-        output.Should().Contain("bmm-sln");
-        output.Should().Contain("bmm-react");
+        output.Should().Contain("dotnet-api");
+        output.Should().Contain("dotnet-react");
         powerShell.WaitForExit();
     }
 }
