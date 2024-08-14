@@ -10,14 +10,15 @@ Templates for my API/SPA/Blazor projects
 - Node.js (for Front Project in ViteJS with React/TS)
  
 ## Development
-- Pour mettre à jour localement le template, utiliser le script à la racine :
+
+- Pour mettre à jour localement le template, lancer le script PowerShell à la racine :
 ```
->.../dotnet-templates/ ./.scripts/publish.ps1
+><path>/dotnet-templates/ ./.scripts/publish.ps1
 ```
  
 ## Usage
 
-- install the template locally:
+- Installer le template locallement à partir de NuGet:
 `dotnet new install DotNet.Template.Solution.Template::8.0.5`
 
 - Template for API: 
@@ -26,24 +27,14 @@ Templates for my API/SPA/Blazor projects
 - Template for React SPA:
 `dotnet new bmm-react -o YourProjectName`
 
-- Lancer l'application:
-`cd src/Web
-dotnet run`
-
-# Database
-- The project use SQL Server 
-
-# Authentification 
-- The project use SQL Server 
-
 # Deployment
 - La stack Core n'inclue pas de mode de déploiement (si ce n'est Docker)
-- La stach PaaS utilise les services Azure
+- La stack PaaS utilise les services Azure
  
-# Technologies
-
 ## Core Features
 
+> `dotnet new bmm-api -o YourProjectName`
+ 
 1. Minimal API Endpoints - native
 2. Quotas - native
 3. Clean Architecture structure - native
@@ -61,8 +52,10 @@ dotnet run`
 16. (option) Infrastructure Authorization - MS Entra Azure AD Application
 17. (option) Versioning - native
 
-## Features Azure
+## Azure Features 
 
+> `dotnet new bmm-api -V PaaS -o YourProjectName`
+ 
 13. Logging/Observability - AppInsights
 14. (optional) Feature Flag - Azure App Configuration
 15. (option) User Authentication - OAuth2 via Azure AD Account | JWT/OpenID Server (Identity Server)
