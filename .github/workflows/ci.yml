@@ -20,12 +20,18 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+        
     - name: Build
       run: dotnet build ./templates/backend/server/DotnetTemplate.sln --configuration Debug 
+      
     # - name: Pack the project
     #   run: dotnet test ./tests/DotNetTemplate.Tests/DotnetTemplate.sln --configuration Debug 
+    
+    - name: Download NuGet CLI
+      run: wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+      
     - name: Pack NuGet package
-      run: dotnet pack ./DotNetTemplate.nuspec 
-          --output ./nupkg \
+      run: mono nuget.exe pack ./DotNetTemplate.nuspec -OutputDirectory ./nupkg
+      
     - name: Publish to NuGet.org
       run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
