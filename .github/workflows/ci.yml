@@ -23,7 +23,7 @@ jobs:
     - name: Build
       run: dotnet build ./templates/backend/server/DotnetTemplate.sln --configuration Debug 
     - name: Pack the project
-      run: dotnet test ./templates/backend/server/DotnetTemplate.sln --configuration Debug 
+      run: dotnet test ./tests/DotNetTemplate.Tests/DotnetTemplate.sln --configuration Debug 
     - name: Pack NuGet package
       run: dotnet pack ./templates/backend/server/YourSolution.sln \
           --configuration Debug \
