@@ -3,6 +3,7 @@ using DotnetTemplate.Application.Common.Caching;
 using DotnetTemplate.Application.Common.Database;
 using DotnetTemplate.Application.Common.Messaging;
 using DotnetTemplate.Domain.BudgetManagement;
+using DotnetTemplate.Domain.Common;
 
 namespace DotnetTemplate.Application.BudgetManagement.GetAllTransactions;
 

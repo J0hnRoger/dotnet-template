@@ -1,6 +1,4 @@
-﻿using CSharpFunctionalExtensions;
-
-namespace DotnetTemplate.Domain.Common;
+﻿namespace DotnetTemplate.Domain.Common;
 
 public sealed record ValidationError : Error
 {

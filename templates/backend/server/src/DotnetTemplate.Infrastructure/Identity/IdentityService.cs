@@ -1,5 +1,5 @@
-using CSharpFunctionalExtensions;
 using DotnetTemplate.Application.Common.Identity;
+using DotnetTemplate.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 

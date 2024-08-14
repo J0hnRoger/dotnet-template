@@ -1,11 +1,20 @@
-﻿using CSharpFunctionalExtensions;
-
-namespace DotnetTemplate.Domain.Common;
+﻿namespace DotnetTemplate.Domain.Common;
 
 public static class ResultExtensions
 {
-    public static Result<TValue> ValidationFailure<TValue>(this Result<TValue> result, Error error)
+    public static TOut Match<TOut>(
+        this Result result,
+        Func<TOut> onSuccess,
+        Func<Result, TOut> onFailure)
     {
-        return result.ConvertFailure<TValue>();
+        return result.IsSuccess ? onSuccess() : onFailure(result);
+    }
+
+    public static TOut Match<TIn, TOut>(
+        this Result<TIn> result,
+        Func<TIn, TOut> onSuccess,
+        Func<Result<TIn>, TOut> onFailure)
+    {
+        return result.IsSuccess ? onSuccess(result.Value) : onFailure(result);
     }
 }

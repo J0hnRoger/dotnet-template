@@ -1,4 +1,6 @@
-﻿namespace DotnetTemplate.Application.Common.Identity;
+﻿using DotnetTemplate.Domain.Common;
+
+namespace DotnetTemplate.Application.Common.Identity;
 
 public interface IIdentityService
 {

@@ -1,4 +1,6 @@
-﻿namespace DotnetTemplate.Application.Common.Messaging;
+﻿using DotnetTemplate.Domain.Common;
+
+namespace DotnetTemplate.Application.Common.Messaging;
 
 public interface ICommand : IRequest<Result>, IBaseCommand;
 

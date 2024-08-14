@@ -6,5 +6,8 @@
     <!-- <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath> -->
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+      <AnalysisLevel>latest</AnalysisLevel>
+      <AnalysisMode>All</AnalysisMode>
+      <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
 </Project>

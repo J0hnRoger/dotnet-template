@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using DotnetTemplate.Application.BudgetManagement.GetAllTransactions;
 using DotnetTemplate.Domain.BudgetManagement;
+using DotnetTemplate.Domain.Common;
 using MediatR;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 
@@ -36,7 +37,7 @@ public class TransactionEndpoints : IEndpoint
         
         if (result.IsFailure)
         {
-            logger.LogError(result.Error);
+            logger.LogError(result.Error.ToString());
             return Results.Problem();
         }
 

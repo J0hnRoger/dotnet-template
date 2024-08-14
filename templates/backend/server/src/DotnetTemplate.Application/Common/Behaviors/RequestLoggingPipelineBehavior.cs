@@ -1,5 +1,4 @@
-﻿using CSharpFunctionalExtensions;
-using MediatR;
+﻿using DotnetTemplate.Domain.Common;
 using Microsoft.Extensions.Logging;
 
 namespace DotnetTemplate.Application.Common.Behaviors;
@@ -8,7 +7,7 @@ internal sealed class RequestLoggingPipelineBehavior<TRequest, TResponse>(
     ILogger<RequestLoggingPipelineBehavior<TRequest, TResponse>> logger)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class
-    where TResponse : IResult
+    where TResponse : Result 
 {
     public async Task<TResponse> Handle(
         TRequest request,

@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CSharpFunctionalExtensions" />
         <PackageReference Include="MediatR.Contracts" />
     </ItemGroup>
 </Project>

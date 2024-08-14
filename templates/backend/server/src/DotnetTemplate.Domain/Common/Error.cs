@@ -32,4 +32,9 @@ public record Error
 
     public static Error Conflict(string code, string description) =>
         new(code, description, ErrorType.Conflict);
+
+    public override string ToString()
+    {
+        return $"[{Type}] Code: {Code}: {Description}";
+    }
 }

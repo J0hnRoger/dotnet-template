@@ -1,8 +1,6 @@
-﻿using Bogus;
-using CSharpFunctionalExtensions;
-using DotnetTemplate.Application.BudgetManagement.CreateTransaction;
+﻿using DotnetTemplate.Application.BudgetManagement.CreateTransaction;
 using DotnetTemplate.Application.BudgetManagement.GetAllTransactions;
-using DotnetTemplate.Domain.BudgetManagement;
+using DotnetTemplate.Domain.Common;
 using FluentAssertions;
 
 namespace DotnetTemplate.Tests.Integration.Api.EndpointTests;

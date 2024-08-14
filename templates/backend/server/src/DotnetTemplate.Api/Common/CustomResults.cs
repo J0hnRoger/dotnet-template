@@ -1,11 +1,10 @@
 ﻿using DotnetTemplate.Domain.Common;
-using IResult = Microsoft.AspNetCore.Http.IResult;
 
 namespace DotnetTemplate.Api.Common;
 
 public static class CustomResults
 {
-    public static IResult Problem<T>(Result<T,Error> result)
+    public static IResult Problem(Result result)
     {
         if (result.IsSuccess)
         {
@@ -58,14 +57,16 @@ public static class CustomResults
                 _ => StatusCodes.Status500InternalServerError
             };
 
-        static Dictionary<string, object?>? GetErrors(Result<T, Error> result)
+        static Dictionary<string, object?>? GetErrors(Result result)
         {
-            if (!result.Error.Code.Contains("Validation."))
+            if (result.Error is not ValidationError validationError)
+            {
                 return null;
+            }
 
             return new Dictionary<string, object?>
             {
-                { "errors", result.Error }
+                { "errors", validationError.Errors }
             };
         }
     }
