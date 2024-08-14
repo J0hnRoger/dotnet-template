@@ -109,7 +109,7 @@ public static class DependencyInjection
 #if (UseSQLServer)
             .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!)
 #endif
-#if (UseCache)
+#if (UseCache == 'Redis')
         .AddRedis(configuration.GetConnectionString("Cache")!)
 #endif
             ;
