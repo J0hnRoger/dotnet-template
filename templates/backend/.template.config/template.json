@@ -11,7 +11,7 @@
   "description": "Modèle de projet d'API.",
   "identity": "DotNet.Architecture.Solution.CSharp",
   "groupIdentity": "DotNet.Architecture.Backend",
-  "shortName": "bmm-api",
+  "shortName": "dotnet-api",
   "tags": {
     "language": "C#",
     "type": "project"

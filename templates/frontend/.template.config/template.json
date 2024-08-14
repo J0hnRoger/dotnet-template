@@ -12,7 +12,7 @@
   "description": "A pragmatic React / Redux solution with Clean Architecture and functional programming in mind",
   "identity": "DotNet.Architecture.Solution.React",
   "groupIdentity": "DotNet.Architecture.FrontEnd",
-  "shortName": "bmm-react",
+  "shortName": "dotnet-react",
   "tags": {
     "language": "TS",
     "type": "project"
