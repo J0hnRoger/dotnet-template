@@ -7,8 +7,8 @@
         <authors>Jonathan Roger</authors>
         <description>Templates collection for dotnet project</description>
         <summary>
-            A project Solution Template using clean architecture and DDD principle for creating apps using React, or Web
-            API only with ASP.NET Core.
+            My starter Solution Template using clean architecture and DDD principle for creating Web Applications 
+            with NET 8
         </summary>
         <releaseNotes>
         </releaseNotes>
