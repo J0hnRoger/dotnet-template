@@ -25,8 +25,7 @@ jobs:
     # - name: Pack the project
     #   run: dotnet test ./tests/DotNetTemplate.Tests/DotnetTemplate.sln --configuration Debug 
     - name: Pack NuGet package
-      run: dotnet pack ./templates/backend/server/YourSolution.sln \
-          --configuration Debug \
+      run: dotnet pack ./DotNetTemplate.nuspec 
           --output ./nupkg \
     - name: Publish to NuGet.org
       run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
