@@ -32,7 +32,7 @@ public class TransactionEndpoints : IEndpoint
         logger.LogInformation("{UserName} use endpoint {Endpoint}", user.Identity!.Name, "GetAllTransactions");
         var query = new GetAllTransactionsQuery();
 
-        Result<List<Transaction>> result = await sender.Send(query, cancellationToken);
+        Result<GetAllTransactionResponse> result = await sender.Send(query, cancellationToken);
         
         if (result.IsFailure)
         {

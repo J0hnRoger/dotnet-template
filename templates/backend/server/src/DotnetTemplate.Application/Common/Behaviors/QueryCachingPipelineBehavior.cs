@@ -22,7 +22,7 @@ internal sealed class QueryCachingPipelineBehavior<TRequest, TResponse>(
             cancellationToken);
 
         string requestName = typeof(TRequest).Name;
-        if (cachedResult is not null)
+        if (cachedResult is not null || cachedResult is Result<TResponse> resultValue && resultValue.Value != null)
         {
             logger.LogInformation("Cache hit for {RequestName}", requestName);
 

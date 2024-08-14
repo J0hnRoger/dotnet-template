@@ -10,9 +10,8 @@ internal sealed class InMemoryCacheService(IMemoryCache cache) : ICacheService
 {
     public Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken = default)
     {
-        T? cacheValue = cache.Get<T>(key);
-        var result = cacheValue == null ? default : cacheValue;
-        return Task.FromResult(result);
+        var cacheValue = cache.Get<T?>(key);
+        return Task.FromResult<T?>(default(T));
     }
 
     public Task SetAsync<T>(
@@ -25,9 +24,9 @@ internal sealed class InMemoryCacheService(IMemoryCache cache) : ICacheService
         return Task.CompletedTask;
     }
 
-    public Task RemoveAsync(string key, CancellationToken cancellationToken = default) {
+    public Task RemoveAsync(string key, CancellationToken cancellationToken = default)
+    {
         cache.Remove(key);
         return Task.CompletedTask;
     }
-
 }

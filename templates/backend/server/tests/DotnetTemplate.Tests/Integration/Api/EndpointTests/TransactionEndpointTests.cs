@@ -19,10 +19,10 @@ public class TransactionEndpointTests : BaseIntegrationTests
     {
         var command = new GetAllTransactionsQuery();
 
-        Result<List<Transaction>> result = await Sender.Send(command);
+        Result<GetAllTransactionResponse> result = await Sender.Send(command);
 
         result.IsSuccess.Should().BeTrue();
-        result.Value.Count.Should().BeGreaterThan(0);
+        result.Value.AllTransactions.Count.Should().BeGreaterThan(0);
     }
 
     [Fact]
