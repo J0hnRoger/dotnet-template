@@ -80,7 +80,7 @@
       "description": "Include MS Entra Azure AD Application authentication.",
       "condition": "(Variant == 'PaaS')"
     },
-    "UseCache": {
+    "Cache": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
@@ -91,6 +91,14 @@
       ],
       "defaultValue": "InMemory",
       "description": "Choose the cache server."
+    },
+    "UseInMemoryCache": {
+      "type": "computed",
+      "value": "(Cache == \"InMemory\")"
+    },
+    "UseRedis": {
+      "type": "computed",
+      "value": "(Cache == \"Redis\")"
     },
     "UseSQLServer": {
       "type": "parameter",

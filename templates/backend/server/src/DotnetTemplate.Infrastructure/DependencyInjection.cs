@@ -93,10 +93,14 @@ public static class DependencyInjection
 
     private static IServiceCollection AddCaching(this IServiceCollection services, IConfiguration configuration)
     {
-        // string redisConnectionString = configuration.GetConnectionString("Cache")!;
-        // services.AddStackExchangeRedisCache(options => options.Configuration = redisConnectionString);
+#if (UseRedis)
+        string redisConnectionString = configuration.GetConnectionString("Cache")!;
+        services.AddStackExchangeRedisCache(options => options.Configuration = redisConnectionString);
+#endif
+        
+#if (UseInMemoryCache)
         services.AddMemoryCache();
-
+#endif
         services.AddSingleton<ICacheService, InMemoryCacheService>();
 
         return services;
@@ -109,7 +113,7 @@ public static class DependencyInjection
 #if (UseSQLServer)
             .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!)
 #endif
-#if (UseCache == "Redis")
+#if (UseRedis)
         .AddRedis(configuration.GetConnectionString("Cache")!)
 #endif
             ;

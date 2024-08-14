@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
-        <id>DotNet.JRR.Templates</id>
+        <id>Pragmatic.DotNet.Templates</id>
         <version>1.0.0</version>
-        <title>DotNet Template</title>
+        <title>Pragmatic DotNet Template</title>
         <authors>Jonathan Roger</authors>
         <description>Templates collection for dotnet project</description>
         <summary>
