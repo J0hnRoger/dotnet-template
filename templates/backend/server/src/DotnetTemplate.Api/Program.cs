@@ -44,6 +44,8 @@ if (app.Environment.IsDevelopment())
     await app.ApplyMigrations();
 }
 
+app.UseCors(app.Environment.IsDevelopment() ? "Development" : "Production");
+
 app.UseHttpsRedirection();
 
 #if (UseAuthentication)

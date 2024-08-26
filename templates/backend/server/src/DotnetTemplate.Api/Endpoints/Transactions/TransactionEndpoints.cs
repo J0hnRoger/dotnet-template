@@ -41,6 +41,6 @@ public class TransactionEndpoints : IEndpoint
             return Results.Problem();
         }
 
-        return Results.Ok(result.Value);
+        return Results.Ok(result.Value.AllTransactions);
     }
 }

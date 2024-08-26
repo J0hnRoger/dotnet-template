@@ -4,13 +4,12 @@ import './App.css';
 import React from 'react';
 import store from './store';
 
-import JobOfferingList from '@components/jobOffering/JobOfferingList';
+import TransactionList from '@components/budget/TransactionList';
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      Job Offering
-      <JobOfferingList />
+      <TransactionList />
     </Provider>
   );
 };

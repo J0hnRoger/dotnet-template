@@ -7,6 +7,7 @@ using DotnetTemplate.Api.Middlewares;
 using DotnetTemplate.Api.OpenApi;
 using DotnetTemplate.Application.Common.Authentication;
 using DotnetTemplate.Infrastructure.Database;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.OpenApi.Models;
 
 namespace DotnetTemplate.Api;
@@ -73,6 +74,16 @@ public static class WebDependencyInjection
                 options.SubstituteApiVersionInUrl = false;
             });
 
+        services.AddCors((options) =>
+        {
+            options.AddPolicy(name: "Development",
+                                  builder => {
+                                      builder.WithOrigins("https://localhost:3000")
+                                          .AllowAnyMethod()
+                                          .AllowCredentials()
+                                          .AllowAnyHeader();
+                                  });
+        });
         services.ConfigureOptions<ConfigureSwaggerGenOptions>();
 
         return services;
