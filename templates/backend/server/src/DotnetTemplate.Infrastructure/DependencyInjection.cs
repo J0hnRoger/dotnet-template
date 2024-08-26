@@ -100,9 +100,9 @@ public static class DependencyInjection
         
 #if (UseInMemoryCache)
         services.AddMemoryCache();
-#endif
         services.AddSingleton<ICacheService, InMemoryCacheService>();
-
+#endif
+        
         return services;
     }
 

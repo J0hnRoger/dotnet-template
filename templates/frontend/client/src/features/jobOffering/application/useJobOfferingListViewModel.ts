@@ -1,21 +1,16 @@
 // src/features/JobOffer/Application/viewmodels/JobOfferingListViewModel.ts
 import { useEffect } from "react";
-import { fetchJobOffers } from "../application/jobOfferActions";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+
+import { useFetchJobOffersQuery } from "../infrastructure/jobOfferApi";
 
 export const useJobOfferingListViewModel = () => {
   const dispatch = useAppDispatch();
-  const { jobOfferings, loading, error } = useAppSelector(
-    (state) => state.jobOffer
-  );
-
-  useEffect(() => {
-    dispatch(fetchJobOffers());
-  }, [dispatch]);
+  const { data: jobOfferings, isLoading, error } = useFetchJobOffersQuery({});
 
   return {
     jobOfferings,
-    loading,
+    loading: isLoading,
     error,
   };
 };

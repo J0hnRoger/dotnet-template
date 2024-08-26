@@ -17,24 +17,15 @@
     "language": "TS",
     "type": "project"
   },
-  "sourceName": "DotnetTemplate",
+  "sourceName": "ReactTemplate",
   "preferNameDirectory": true,
   "symbols": {
-    "jrRepositoryUrl": {
-      "type": "generated",
-      "generator": "constant",
-      "replaces": "jrRepositoryUrl",
-      "parameters": {
-        "value": "https://github.com/J0hnRoger/dotnet-template"
-      }
-    },
-    "jrrPackageVersion": {
-      "type": "generated",
-      "generator": "constant",
-      "replaces": "jrPackageVersion",
-      "parameters": {
-        "value": "1.0.0"
-      }
+    "AppAuthentication": {
+        "type": "parameter",
+        "datatype": "bool",
+        "defaultValue": false,
+        "description": "Include MSAL authentication.",
+        "condition": "(Variant == 'PaaS')"
     }
   },
   "sources": [

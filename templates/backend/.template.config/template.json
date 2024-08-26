@@ -1,6 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "Jonathan Roger",
+  "author": "John Roger",
   "classifications": [
     "Web",
     "SPA",
@@ -149,22 +149,6 @@
         "README-template.md": "README.md"
       },
       "modifiers": [
-        {
-          "condition": "(UseApiOnly)",
-          "exclude": [
-            "server/src/Web/ClientApp/**",
-            "server/src/Web/ClientApp-React/**",
-            "server/src/Web/Templates/**",
-            "server/src/Web/config.nswag",
-            "server/src/Web/config-react.nswag",
-            "server/src/Web/Web.http",
-            "server/tests/Web.AcceptanceTests/**"
-          ],
-          "rename": {
-            "config-webapi.nswag": "config.nswag",
-            "Web-webapi.http": "Web.http"
-          }
-        },
         {
           "condition": "(UseSQLServer)",
           "exclude": [
