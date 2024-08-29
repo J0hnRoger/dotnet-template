@@ -4,12 +4,13 @@ using DotnetTemplate.Api;
 using DotnetTemplate.Api.Extensions;
 using DotnetTemplate.Application;
 using DotnetTemplate.Infrastructure;
-using DotnetTemplate.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Init Configuration
 builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
+
+builder.Services.AddOptions();
 
 builder.Services
     .AddWebApiServices(builder.Configuration)

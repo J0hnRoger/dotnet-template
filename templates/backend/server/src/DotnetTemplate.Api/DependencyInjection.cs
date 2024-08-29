@@ -19,20 +19,24 @@ public static class WebDependencyInjection
         services.AddScoped<ICurrentUser, CurrentUser>();
 
         services.AddHttpContextAccessor();
-        services
-            .AddOptions<RateLimitOptions>()
-            .Bind(configuration.GetSection("RateLimit"))
-            .ValidateDataAnnotations();
 
         services.AddRateLimiter((rateLimiterOptions) =>
         {
+            var rateLimitConfig = configuration
+                .GetSection("RateLimit")
+                .Get<RateLimitOptions>() 
+                                  ?? RateLimitOptions.CreateDefault();
+            
             rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
             rateLimiterOptions.AddFixedWindowLimiter("fixed",
                 opt =>
                 {
-                    opt.PermitLimit = configuration.GetSection("RateLimit").Bind<RateLimiterOptions>().Val
+                    opt.PermitLimit = rateLimitConfig.PermitLimit;
+                    opt.QueueLimit = rateLimitConfig.QueueLimit;
+                    opt.Window = TimeSpan.FromMinutes(rateLimitConfig.WindowSeconds);
                 });
         });
+        
         services.AddHealthChecks()
             .AddDbContextCheck<ApplicationDbContext>();
 
