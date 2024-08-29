@@ -1,14 +1,13 @@
 ﻿using System.Reflection;
 using Asp.Versioning;
-using Azure.Identity;
 using DotnetTemplate.Api.Common;
+using DotnetTemplate.Api.Common.Configuration;
 using DotnetTemplate.Api.Extensions;
 using DotnetTemplate.Api.Middlewares;
 using DotnetTemplate.Api.OpenApi;
 using DotnetTemplate.Application.Common.Authentication;
 using DotnetTemplate.Infrastructure.Database;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace DotnetTemplate.Api;
 
@@ -20,7 +19,20 @@ public static class WebDependencyInjection
         services.AddScoped<ICurrentUser, CurrentUser>();
 
         services.AddHttpContextAccessor();
+        services
+            .AddOptions<RateLimitOptions>()
+            .Bind(configuration.GetSection("RateLimit"))
+            .ValidateDataAnnotations();
 
+        services.AddRateLimiter((rateLimiterOptions) =>
+        {
+            rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+            rateLimiterOptions.AddFixedWindowLimiter("fixed",
+                opt =>
+                {
+                    opt.PermitLimit = configuration.GetSection("RateLimit").Bind<RateLimiterOptions>().Val
+                });
+        });
         services.AddHealthChecks()
             .AddDbContextCheck<ApplicationDbContext>();
 
@@ -77,12 +89,13 @@ public static class WebDependencyInjection
         services.AddCors((options) =>
         {
             options.AddPolicy(name: "Development",
-                                  builder => {
-                                      builder.WithOrigins("https://localhost:3000")
-                                          .AllowAnyMethod()
-                                          .AllowCredentials()
-                                          .AllowAnyHeader();
-                                  });
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost:3000")
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .AllowAnyHeader();
+                });
         });
         services.ConfigureOptions<ConfigureSwaggerGenOptions>();
 
