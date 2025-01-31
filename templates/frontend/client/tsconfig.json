@@ -34,7 +34,8 @@
   },
   "include": [
     "src",
-    "mocks/jobApiMocks.ts",
+    "mocks/jobApiMocks.ts", 
+    "vite-env.d.ts",
   ],
   "references": [
     {

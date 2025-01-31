@@ -7,8 +7,6 @@ import { healthCheck } from './common/api.ts'
 // TODO - if serverCheck fail, we start the mock server
 async function enableMocking() {
   const serverUrl = import.meta.env.VITE_BACKEND_URL
-  console.log(serverUrl)
-
   const available = await healthCheck(serverUrl + "/_health")
 
   if (available || process.env.NODE_ENV !== 'development') {

@@ -23,10 +23,10 @@ public static class WebDependencyInjection
         services.AddRateLimiter((rateLimiterOptions) =>
         {
             var rateLimitConfig = configuration
-                .GetSection("RateLimit")
-                .Get<RateLimitOptions>() 
+                                      .GetSection("RateLimit")
+                                      .Get<RateLimitOptions>()
                                   ?? RateLimitOptions.CreateDefault();
-            
+
             rateLimiterOptions.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
             rateLimiterOptions.AddFixedWindowLimiter("fixed",
                 opt =>
@@ -36,7 +36,7 @@ public static class WebDependencyInjection
                     opt.Window = TimeSpan.FromMinutes(rateLimitConfig.WindowSeconds);
                 });
         });
-        
+
         services.AddHealthChecks()
             .AddDbContextCheck<ApplicationDbContext>();
 
@@ -95,7 +95,10 @@ public static class WebDependencyInjection
             options.AddPolicy(name: "Development",
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:3000") // Frontend ViteTS
+                    string frontendUrl = configuration.GetValue<string>("FrontEnd:Url") ??
+                                         throw new ArgumentException("Frontend:Url not specified in Configuration");
+
+                    builder.WithOrigins(frontendUrl) // Frontend ViteTS
                         .AllowAnyMethod()
                         .AllowCredentials()
                         .AllowAnyHeader();
@@ -103,7 +106,7 @@ public static class WebDependencyInjection
         });
 
         services.AddControllersWithViews(); // Frontend ViteTS
-        
+
         services.ConfigureOptions<ConfigureSwaggerGenOptions>();
 
         return services;
