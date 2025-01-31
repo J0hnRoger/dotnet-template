@@ -1,4 +1,4 @@
-import { http } from 'msw'
+import { http, HttpResponse } from 'msw'
 
 const transactions = [
   {
@@ -45,12 +45,11 @@ const transactions = [
 
 export const handlers = [
   // GET /api/transactions
-  http.get('/api/transactions', (req, res, ctx) => {
-    debugger
-    return res(
-      ctx.status(200),
-      ctx.json(transactions)
-    )
+  http.get(`/api/transactions`, (req, res, ctx) => {
+    return new HttpResponse(JSON.stringify(transactions), {
+      status: 200,
+      statusText: 'OK',
+    })
   }),
 
   // POST /api/transactions

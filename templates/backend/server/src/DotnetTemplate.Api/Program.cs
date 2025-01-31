@@ -53,9 +53,6 @@ app.UseHttpsRedirection();
 app.UsePermissions();
 #endif
 
-app.UseRouting();
-app.MapControllers();
-
 app.UseSwaggerWithUi();
 
 app.UseExceptionHandler();

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { serverUrl } from './config';
+import { healthCheck } from './common/api';
 
 interface Props {
     children: React.ReactNode;
@@ -12,8 +13,8 @@ const ServerCheck: React.FC<Props> = ({ children }) => {
         // Fonction pour vérifier l'état du serveur, par exemple avec un simple fetch
         const checkServerStatus = async () => {
             try {
-                const response = await fetch(`${serverUrl}/api/health`); // Remplacez '/api/health' par l'URL de votre choix pour vérifier l'état du serveur
-                if (!response.ok) throw new Error('Server is down');
+                const available = await healthCheck(serverUrl)
+                if (!available) throw new Error('Server is down');
                 setIsServerDown(false);
             } catch (error) {
                 setIsServerDown(true);

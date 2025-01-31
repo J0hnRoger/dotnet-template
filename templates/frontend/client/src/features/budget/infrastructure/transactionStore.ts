@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { transactionApi } from './transactionApi'
 import { TransactionDto } from '../application/types/budgetTypes'
 
 interface TransactionStore {
@@ -11,7 +11,7 @@ interface TransactionStore {
   updateTransaction: (transaction: Partial<TransactionDto>) => Promise<void>
 }
 
-export const useTransactionStore = create(persist<TransactionStore>((set) => ({
+export const useTransactionStore = create<TransactionStore>((set) => ({
   transactions: [],
   loading: false,
   error: null,
@@ -19,8 +19,7 @@ export const useTransactionStore = create(persist<TransactionStore>((set) => ({
   fetchTransactions: async () => {
     set({ loading: true, error: null })
     try {
-      const response = await fetch(`${import.meta.env.VITE_APP_SERVER_URL}/api/transactions`)
-      const data = await response.json()
+      const data = await transactionApi.fetchTransactions()
       set({ transactions: data, loading: false })
     } catch (error) {
       set({ error: error as Error, loading: false })
@@ -30,12 +29,7 @@ export const useTransactionStore = create(persist<TransactionStore>((set) => ({
   createTransaction: async (transaction) => {
     set({ loading: true, error: null })
     try {
-      const response = await fetch(`${import.meta.env.VITE_APP_SERVER_URL}/api/transactions`, {
-        method: 'POST',
-        body: JSON.stringify(transaction),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      const newTransaction = await response.json()
+      const newTransaction = await transactionApi.createTransaction(transaction)
       set((state) => ({
         transactions: [...state.transactions, newTransaction],
         loading: false
@@ -48,12 +42,7 @@ export const useTransactionStore = create(persist<TransactionStore>((set) => ({
   updateTransaction: async (transaction) => {
     set({ loading: true, error: null })
     try {
-      const response = await fetch(`${import.meta.env.VITE_APP_SERVER_URL}/api/transactions/${transaction.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(transaction),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      const updatedTransaction = await response.json()
+      const updatedTransaction = await transactionApi.updateTransaction(transaction)
       set((state) => ({
         transactions: state.transactions.map(t => 
           t.id === updatedTransaction.id ? updatedTransaction : t
@@ -64,4 +53,4 @@ export const useTransactionStore = create(persist<TransactionStore>((set) => ({
       set({ error: error as Error, loading: false })
     }
   }
-}), { name: "transaction-store" })) 
+})) 
