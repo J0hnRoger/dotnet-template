@@ -53,10 +53,13 @@ app.UseHttpsRedirection();
 app.UsePermissions();
 #endif
 
+app.UseRouting();
+app.MapControllers();
+
 app.UseSwaggerWithUi();
 
 app.UseExceptionHandler();
 
-app.Run();
+await app.RunAsync();
 
 public partial class Program;

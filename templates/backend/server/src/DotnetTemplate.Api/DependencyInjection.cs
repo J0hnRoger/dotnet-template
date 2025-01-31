@@ -95,12 +95,15 @@ public static class WebDependencyInjection
             options.AddPolicy(name: "Development",
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:3000")
+                    builder.WithOrigins("https://localhost:3000") // Frontend ViteTS
                         .AllowAnyMethod()
                         .AllowCredentials()
                         .AllowAnyHeader();
                 });
         });
+
+        services.AddControllersWithViews(); // Frontend ViteTS
+        
         services.ConfigureOptions<ConfigureSwaggerGenOptions>();
 
         return services;
