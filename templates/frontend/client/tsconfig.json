@@ -34,7 +34,7 @@
   },
   "include": [
     "src",
-    "mocks/jobApiMocks.ts"
+    "mocks/jobApiMocks.ts",
   ],
   "references": [
     {

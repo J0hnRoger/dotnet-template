@@ -1,7 +1,7 @@
 import { delay, http, HttpResponse } from "msw";
 
 export const handlers = [
-  http.get("https://backend/transactions", async () => {
+  http.get("http://localhost:7107/transactions", async () => {
     await delay();
 
     return HttpResponse.json([
