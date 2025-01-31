@@ -8,7 +8,7 @@ using DotnetTemplate.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Init Configuration
-builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
+builder.Services.AddKeyVaultIfConfigured(builder.Configuration, builder.Environment);
 
 builder.Services.AddOptions();
 
@@ -53,7 +53,13 @@ app.UseHttpsRedirection();
 app.UsePermissions();
 #endif
 
-app.UseSwaggerWithUi();
+#if (UseFrontend)
+app.AddFrontend();
+#endif
+
+
+if (app.Environment.IsDevelopment())
+    app.UseSwaggerWithUi();
 
 app.UseExceptionHandler();
 

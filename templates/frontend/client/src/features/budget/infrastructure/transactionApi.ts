@@ -31,7 +31,7 @@ export const transactionApi = {
 }
 
 export const {
-  useFetchTransactionsQuery,
-  useCreateTransactionMutation,
-  useUpdateTransactionMutation,
+  fetchTransactions,
+  createTransaction,
+  updateTransaction,
 } = transactionApi;

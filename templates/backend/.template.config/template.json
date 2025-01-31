@@ -30,6 +30,12 @@
       "defaultValue": "Core",
       "description": "Choose the variant of the template."
     },
+    "UseFrontend": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": false,
+      "description": "Include proxy with Vite Frontend Project"
+    },
     "UseAuthentication": {
       "type": "parameter",
       "datatype": "bool",

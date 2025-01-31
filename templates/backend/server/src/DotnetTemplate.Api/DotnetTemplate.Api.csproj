@@ -9,9 +9,9 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DefineConstants>TRACE;UseSample</DefineConstants>
+        <DefineConstants>TRACE;UseSample</DefineConstants>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
         <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" />
@@ -29,9 +29,34 @@
         <Link>.dockerignore</Link>
       </Content>
     </ItemGroup>
-
+    
+    <!-- frontend files -->
+    <PropertyGroup>
+        <FrontendRoot>..\..\..\..\frontend\client\dist</FrontendRoot>
+    </PropertyGroup>
+    
+    <Target Name="CopyFrontendDist" AfterTargets="Build">
+        <ItemGroup>
+            <FrontendFiles Include="$(FrontendRoot)\**\*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(FrontendFiles)" DestinationFolder="wwwroot\%(RecursiveDir)" />
+    </Target>
+    
     <ItemGroup>
       <ProjectReference Include="..\DotnetTemplate.Infrastructure\DotnetTemplate.Infrastructure.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\dist\assets\browser-B85LgOIX.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\assets\index-BJHfyXWN.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\assets\index-Bu0P1QZn.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\index.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\mockServiceWorker.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\public\mockServiceWorker.js" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="wwwroot\" />
     </ItemGroup>
 
 </Project>

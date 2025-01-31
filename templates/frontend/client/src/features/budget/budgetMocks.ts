@@ -45,42 +45,10 @@ const transactions = [
 
 export const handlers = [
   // GET /api/transactions
-  http.get(`/api/transactions`, (req, res, ctx) => {
+  http.get(`/api/transactions`, () => {
     return new HttpResponse(JSON.stringify(transactions), {
       status: 200,
       statusText: 'OK',
     })
   }),
-
-  // POST /api/transactions
-  http.post('/api/transactions', async (req, res, ctx) => {
-    const newTransaction = await req.json()
-    const transaction = {
-      id: (transactions.length + 1).toString(),
-      ...newTransaction,
-      date: newTransaction.date || new Date().toISOString().split('T')[0]
-    }
-    transactions.push(transaction)
-    return res(
-      ctx.status(201),
-      ctx.json(transaction)
-    )
-  }),
-
-  // PUT /api/transactions/:id
-  http.put('/api/transactions/:id', async (req, res, ctx) => {
-    const { id } = req.params
-    const updatedTransaction = await req.json()
-    const index = transactions.findIndex(t => t.id === id)
-    
-    if (index === -1) {
-      return res(ctx.status(404))
-    }
-
-    transactions[index] = { ...transactions[index], ...updatedTransaction }
-    return res(
-      ctx.status(200),
-      ctx.json(transactions[index])
-    )
-  })
 ]
