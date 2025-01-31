@@ -1,10 +1,16 @@
-import { useFetchTransactionsQuery } from "../infrastructure/transactionApi";
+import { useTransactionStore } from '../infrastructure/transactionStore'
+import { useEffect } from 'react'
 
 export const useTransactionListViewModel = () => {
-  const result = useFetchTransactionsQuery({});
+  const { transactions, loading, error, fetchTransactions } = useTransactionStore()
+
+  useEffect(() => {
+    fetchTransactions()
+  }, [])
+
   return {
-    transactions: result.data,
-    loading: result.isLoading,
-    error: result.error,
-  };
-};
+    transactions,
+    loading,
+    error
+  }
+}

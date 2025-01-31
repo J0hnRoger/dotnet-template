@@ -491,3 +491,4 @@ templates/backend/server/.idea
 **/*.sqlite3
 **/*.db-shm
 **/*.db-wal
+templates/backend/.idea/.idea.backend.dir/.idea/workspace.xml
