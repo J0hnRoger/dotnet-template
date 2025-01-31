@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SplashScreen from './components/SplashScreen';
 import { serverUrl } from './config';
 
 interface Props {
@@ -30,7 +29,7 @@ const ServerCheck: React.FC<Props> = ({ children }) => {
     }, []);
 
     if (isServerDown) {
-        return <SplashScreen />;
+        return <div>Server is down</div>;
     }
 
     return <>{children}</>;

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TransactionDto, CategoryDto } from "../application/types/budgetTypes";
+import { TransactionDto } from "../application/types/budgetTypes";
 
 export const transactionApi = createApi({
   reducerPath: "transactionApi",

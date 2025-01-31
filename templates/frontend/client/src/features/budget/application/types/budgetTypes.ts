@@ -8,4 +8,4 @@ export type TransactionDto = {
 
 export interface CategoryDto {
   name: string;
-};
+}

@@ -1,5 +1,4 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import { addInfrastructure } from "./dependencyInjection";
 
 import jobOfferReducer from "./features/jobOffering";
 import uiReducer from "./core/ui";
@@ -9,8 +8,10 @@ import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { jobOfferApi } from "./features/jobOffering/infrastructure/jobOfferApi";
 import { transactionApi } from "./features/budget/infrastructure/transactionApi";
 
+// @ts-ignore
 const coreMiddlewares = [];
 
+// @ts-ignore
 const featureMiddlewares = [];
 
 const store = configureStore({

@@ -28,11 +28,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@common/*": ["src/common/*"],
+      "@components/*": ["src/components/*"],
     }
   },
   "include": [
-    "src"
-  , "mocks/jobApiMocks.ts"  ],
+    "src",
+    "mocks/jobApiMocks.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

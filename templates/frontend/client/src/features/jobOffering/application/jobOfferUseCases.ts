@@ -9,7 +9,7 @@ export const fetchJobOffers = createAsyncThunk(
     dispatch(setLoader(true));
     try {
       const response = await jobOfferApi.endpoints.fetchJobOffers.initiate({});
-      return response.data;
+      return response;
     } catch (error) {
       dispatch(setNotification(error.message));
       throw error;

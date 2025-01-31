@@ -1,5 +1,6 @@
 export type JobOffer = {
-  titre: string;
+  id: string;
+  title: string;
   description: string;
   enterprise: object;
   duration: number;

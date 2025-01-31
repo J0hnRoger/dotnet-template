@@ -1,6 +1,6 @@
 import { SerializedError, createSlice } from "@reduxjs/toolkit";
-import { jobOfferApi, transactionApi } from "../infrastructure/transactionApi";
-import { TransactionDto } from "./types/budgetTypes";
+import { transactionApi } from "../infrastructure/transactionApi";
+import { JobOfferDto } from "@/features/jobOffering/application/types/jobOfferTypes";
 
 interface JobOfferState {
   jobOffers: JobOfferDto[];
@@ -21,21 +21,21 @@ const transactionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        transactionApi.endpoints.fetchJobOffers.matchPending,
+        transactionApi.endpoints.fetchTransactions.matchPending,
         (state) => {
           state.loading = true;
           state.error = null;
         }
       )
       .addMatcher(
-        jobOfferApi.endpoints.fetchJobOffers.matchFulfilled,
+        transactionApi.endpoints.fetchTransactions.matchFulfilled,
         (state, action) => {
           state.loading = false;
           state.jobOffers = action.payload;
         }
       )
       .addMatcher(
-        jobOfferApi.endpoints.fetchJobOffers.matchRejected,
+        transactionApi.endpoints.fetchTransactions.matchRejected,
         (state, action) => {
           state.loading = false;
           state.error = action.error;
