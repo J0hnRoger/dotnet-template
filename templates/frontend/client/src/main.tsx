@@ -4,7 +4,6 @@ import App from './App.tsx'
 import './index.css'
 import { healthCheck } from './common/api.ts'
 
-// TODO - if serverCheck fail, we start the mock server
 async function enableMocking() {
   const serverUrl = import.meta.env.VITE_BACKEND_URL
   const available = await healthCheck(serverUrl + "/_health")
