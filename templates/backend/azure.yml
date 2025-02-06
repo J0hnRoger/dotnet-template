@@ -1,7 +1,0 @@
-# Name of the application.
-name: clean-architecture-azd
-services:
-  web:
-    language: csharp
-    project: ./src/Web
-    host: appservice

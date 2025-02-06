@@ -2,7 +2,6 @@ metadata description = 'Creates an Azure App Service plan.'
 param name string
 param location string = resourceGroup().location
 param tags object = {}
-param logAnalyticsWorkspaceId string = ''
 
 param kind string = ''
 param reserved bool = true
@@ -16,24 +15,6 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   kind: kind
   properties: {
     reserved: reserved
-  }
-}
-
-resource appServicePlanDiagSettings 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = if (!(empty(logAnalyticsWorkspaceId))) {
-  name: '${appServicePlan.name}-diagnosticSettings'
-  scope: appServicePlan
-  properties: {
-    workspaceId: logAnalyticsWorkspaceId
-    metrics: [
-      {
-        category: 'AllMetrics'
-        enabled: true
-        retentionPolicy: {
-          days: 7
-          enabled: true
-        }
-      }
-    ]
   }
 }
 

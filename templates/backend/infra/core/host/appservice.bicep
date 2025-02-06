@@ -8,7 +8,6 @@ param applicationInsightsName string = ''
 param appServicePlanId string
 param keyVaultName string = ''
 param managedIdentity bool = !empty(keyVaultName)
-param logAnalyticsWorkspaceId string = ''
 
 // Runtime Properties
 @allowed([
@@ -80,53 +79,6 @@ resource appService 'Microsoft.Web/sites@2022-03-01' = {
     properties: {
       allow: false
     }
-  }
-}
-
-resource webAppDiagSettings 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = if (!(empty(logAnalyticsWorkspaceId))) {
-  name: '${appService.name}-diagnosticSettings'
-  scope: appService
-  properties: {
-    workspaceId: logAnalyticsWorkspaceId
-    logs: [
-      {
-        category: 'AppServiceHTTPLogs'
-        categoryGroup: null
-        enabled: true
-        retentionPolicy: {
-          days: 7
-          enabled: true
-        }
-      }
-      {
-        category: 'AppServiceConsoleLogs'
-        categoryGroup: null
-        enabled: true
-        retentionPolicy: {
-          days: 7
-          enabled: true
-        }
-      }
-      {
-        category: 'AppServiceAppLogs'
-        categoryGroup: null
-        enabled: true
-        retentionPolicy: {
-          days: 7
-          enabled: true
-        }
-      }
-    ]
-    metrics: [
-      {
-        category: 'AllMetrics'
-        enabled: true
-        retentionPolicy: {
-          days: 7
-          enabled: true
-        }
-      }
-    ]
   }
 }
 
