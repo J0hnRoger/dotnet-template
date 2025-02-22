@@ -38,7 +38,7 @@ public static class AzureAdApplicationExtensions
             options.TokenValidationParameters = new TokenValidationParameters {ValidateIssuer = true};
 
             // Gestion des événements
-            options.Events = new OpenIdConnectEvents { OnTokenValidated = OnAzureAdTokenValidatedAsync};
+            options.Events = new OpenIdConnectEvents {OnTokenValidated = OnAzureAdTokenValidatedAsync};
         });
 
         return builder;
@@ -49,7 +49,7 @@ public static class AzureAdApplicationExtensions
     /// </summary>
     private static async Task OnAzureAdTokenValidatedAsync(TokenValidatedContext context)
     {
-        if (context.Principal?.Identity is not ClaimsIdentity claimsIdentity)
+        if (context.Principal?.Identity is not ClaimsIdentity azureAdIdentity)
             throw new Exception("User not authenticated");
 
         var userManager = context.HttpContext.RequestServices
@@ -57,16 +57,16 @@ public static class AzureAdApplicationExtensions
         var signInManager = context.HttpContext.RequestServices
             .GetRequiredService<SignInManager<ApplicationUser>>();
 
-        // Identifiant unique Azure AD
-        var externalUserId = claimsIdentity.FindFirst(ClaimConstants.Oid);
-        // On utilise l'UPN pour lier l'identité externe à l'utilisateur AspNetIdentity
-        var email = claimsIdentity.FindFirst("upn") ??
-                    claimsIdentity.FindFirst("unique_name");
+        // Récupération des informations Azure AD
+        var externalUserId = azureAdIdentity.FindFirst(ClaimConstants.Oid);
+        var email = azureAdIdentity.FindFirst("upn") ??
+                    azureAdIdentity.FindFirst("unique_name");
 
         if (email == null || externalUserId == null)
             throw new Exception("Impossible de récupérer les informations de l'utilisateur depuis Azure AD.");
 
         var user = await userManager.FindByEmailAsync(email.Value);
+
         if (user == null)
         {
             context.Response.Redirect("/error?msg=NoUser");
@@ -74,14 +74,54 @@ public static class AzureAdApplicationExtensions
             return;
         }
 
+        // Mise à jour des informations utilisateur si nécessaire
+        if (MapUserInfo(user, azureAdIdentity))
+            await userManager.UpdateAsync(user);
+
+        // Gestion du login externe
+        await EnsureExternalLoginAsync(user, externalUserId.Value, userManager, context);
+
+        // Création d'une nouvelle identité basée uniquement sur ASP.NET Identity
+        var userPrincipal = await signInManager.CreateUserPrincipalAsync(user);
+
+        // Remplacer l'identité Azure AD par celle d'ASP.NET Identity
+        context.Principal = userPrincipal;
+
+        await signInManager.SignInAsync(user, isPersistent: false);
+    }
+
+    private static bool MapUserInfo(ApplicationUser user, ClaimsIdentity azureAdIdentity)
+    {
+        bool shouldUpdate = false;
+
+        string? givenName = azureAdIdentity.FindFirst("given_name")?.Value;
+        string? familyName = azureAdIdentity.FindFirst("family_name")?.Value;
+
+        if (String.IsNullOrEmpty(user.FirstName))
+        {
+            user.FirstName = givenName;
+            shouldUpdate = true;
+        }
+
+        if (String.IsNullOrEmpty(user.LastName))
+        {
+            user.LastName = familyName;
+            shouldUpdate = true;
+        }
+
+        return shouldUpdate;
+    }
+
+    private static async Task EnsureExternalLoginAsync(ApplicationUser user, string externalUserId,
+        UserManager<ApplicationUser> userManager, TokenValidatedContext context)
+    {
         var userLogins = await userManager.GetLoginsAsync(user);
         var hasExternalLogin = userLogins.Any(x =>
-            x.ProviderKey == externalUserId.Value && x.LoginProvider == "AzureAD");
+            x.ProviderKey == externalUserId && x.LoginProvider == "AzureAD");
 
         if (!hasExternalLogin)
         {
-            // Si aucun login externe n'existe pour cet utilisateur, on l'ajoute
-            var info = new UserLoginInfo("AzureAD", externalUserId.Value, "Azure Active Directory");
+            var info = new UserLoginInfo("AzureAD", externalUserId, "Azure Active Directory");
             var result = await userManager.AddLoginAsync(user, info);
             if (!result.Succeeded)
             {
@@ -89,10 +129,5 @@ public static class AzureAdApplicationExtensions
                 context.HandleResponse();
             }
         }
-
-        // Ajout manuel du Claim NameIdentifier pour lier l'user local
-        claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
-
-        await signInManager.SignInAsync(user, isPersistent: false);
     }
 }
