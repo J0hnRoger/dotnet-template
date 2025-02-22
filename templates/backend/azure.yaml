@@ -4,9 +4,12 @@
 # Make changes as needed to describe your application setup.
 # To learn more about the azure.yaml file, visit https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-schema
 
-# Name of the application.
-name: azd-starter
-# services:
+name: azd-dotnettemplate
+services:
+  backend:
+    language: csharp
+    project: ./server/src/DotnetTemplate.Api
+    host: appservice
 #   ## An example for a python API service.
 #   ## The service is named 'python-api'.
 #   ## The language is 'python'.

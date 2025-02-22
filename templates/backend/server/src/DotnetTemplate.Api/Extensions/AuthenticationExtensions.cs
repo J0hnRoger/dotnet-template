@@ -4,15 +4,20 @@ namespace DotnetTemplate.Api.Extensions;
 
 public static class AuthorizationExtensions
 {
-    public static IServiceCollection AddPermissions(this IServiceCollection services, 
+    public static IServiceCollection AddBaseAuthentication(this IServiceCollection services,
         ConfigurationManager builderConfiguration)
     {
         // Identity
-        services.AddAuthentication()
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultChallengeScheme = "AzureAD"; // IdentityConstants.ApplicationScheme; 
+                options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+            })
+            .AddCookie(IdentityConstants.ApplicationScheme)
             .AddBearerToken(IdentityConstants.BearerScheme);
-        
-        services.AddAuthorizationBuilder();
-        
+
         return services;
     }
 
@@ -20,7 +25,7 @@ public static class AuthorizationExtensions
     {
         app.UseAuthentication();
         app.UseAuthorization();
-        
+
         return app;
     }
 }

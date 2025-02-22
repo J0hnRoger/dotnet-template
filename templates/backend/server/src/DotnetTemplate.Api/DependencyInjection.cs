@@ -59,7 +59,9 @@ public static class WebDependencyInjection
         });
 
 #if (UseAuthentication)
-        services.AddPermissions(configuration);
+        services.AddBaseAuthentication(configuration);
+        services.AddAuthentication()
+            .AddEntraAppAuthentication(configuration);
 #endif
 
 #if (AppAuthentication)
